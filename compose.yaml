@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+#      args:
+#        MY_VAR: spring.datasource.url=jdbc:mysql://backend_database:3306/freelance_be
+    depends_on: [database]
+    environment:
+      - spring.datasource.url=jdbc:mysql://backend_database:3306/freelance_be
+    ports:
+      - "9000:9000"
+    networks:
+      - freelance_be
+  database:
+    container_name: backend_database
+    image: mysql
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_DATABASE=freelance_be
+      - MYSQL_ROOT_PASSWORD=Godfather@2.0
+    networks:
+      - freelance_be
+networks:
+  freelance_be:

@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/freelance_be
+    username: root
+    password: Godfather@2.0
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  security:
+    user:
+      name: phucnq
+      password: phucnq
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 635061596522-l2gbf7ujvgohbgj82lt7sstf9fc16sqh.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: http://localhost:9000/auth
+          facebook:
+            clientId: "asdf"
+            clientSecret: "asdf"
+            redirectUri: "asdf"
+server:
+  port: 9000
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+jwt:
+  secretKey: asdfassdfasdfasdfsdfdfasdfasdfasdfsdfasdfsdf
+
+
