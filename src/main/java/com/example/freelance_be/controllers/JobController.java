@@ -4,11 +4,14 @@ import com.example.freelance_be.dto.request.job.CreateJobRequestBody;
 import com.example.freelance_be.dto.response.job.CreateJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetAllJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetJobResponseBody;
+import com.example.freelance_be.entities.Job;
 import com.example.freelance_be.services.job.impl.JobService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/jobs")
@@ -20,16 +23,12 @@ public class JobController {
     }
     @PostMapping("")
     public ResponseEntity<CreateJobResponseBody> createJob(@RequestBody CreateJobRequestBody requestBody){
-//        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        System.out.println(jwt.getClaims().toString());
         SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
-//        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         return ResponseEntity.ok().body(jobService.createJob(requestBody));
     }
 
     @GetMapping("")
-    public ResponseEntity<GetAllJobResponseBody> getAllJob(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public ResponseEntity<List<Job>> getAllJob(){
         return  ResponseEntity.ok().body(jobService.getAllJob());
     }
 
