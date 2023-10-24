@@ -20,6 +20,10 @@ public class User {
     )
     private Set<Role> roles;
 
+//    @ManyToMany(targetEntity = Job.class, fetch = FetchType.LAZY)
+//    @JoinTable(name = "apply_job",
+//    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+
     public Long getId() {
         return id;
     }

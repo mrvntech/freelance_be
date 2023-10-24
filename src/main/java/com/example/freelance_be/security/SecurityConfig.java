@@ -45,7 +45,8 @@ public class SecurityConfig {
                     .requestMatchers("my-tasks")
                     .authenticated()
                     .requestMatchers(HttpMethod.POST, "categories")
-                    .hasAuthority(Role.ADMIN.getName())
+//                    .hasAuthority(Role.ADMIN.getName())
+                    .authenticated()
                     .anyRequest()
                     .permitAll();
         });

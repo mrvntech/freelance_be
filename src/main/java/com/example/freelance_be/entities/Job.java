@@ -3,6 +3,7 @@ package com.example.freelance_be.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity(name = "job")
 public class Job {
@@ -52,6 +53,11 @@ public class Job {
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "freelancer_id", referencedColumnName = "id")
     private User freelancer;
+
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "applierId", referencedColumnName = "id"))
+    private Set<User> appliers;
 
     public Long getId() {
         return id;

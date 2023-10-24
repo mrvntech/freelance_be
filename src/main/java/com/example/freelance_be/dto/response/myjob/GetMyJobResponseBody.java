@@ -1,57 +1,66 @@
-package com.example.freelance_be.dto.response.job;
+package com.example.freelance_be.dto.response.myjob;
 
-import com.example.freelance_be.services.job.domain.Customer;
-import com.example.freelance_be.services.job.domain.Job;
+import java.util.List;
 
-public class GetJobResponseBody {
+public class GetMyJobResponseBody {
     private Long id;
     private String name;
     private Double budget;
     private String information;
-    private Job.Category category;
-    private Customer customer;
-    public Job.Category getCategory() {
-        return category;
-    }
-    public void setCategory(Job.Category category) {
-        this.category = category;
-    }
+    private String imageUrl;
+    private List<UserProfile> users;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Double getBudget() {
         return budget;
     }
+
     public void setBudget(Double budget) {
         this.budget = budget;
     }
+
     public String getInformation() {
         return information;
     }
+
     public void setInformation(String information) {
         this.information = information;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public static class Category {
+    public List<UserProfile> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserProfile> users) {
+        this.users = users;
+    }
+
+    public static class UserProfile{
         private Long id;
-        private String name;
+        private String username;
 
         public Long getId() {
             return id;
@@ -61,12 +70,12 @@ public class GetJobResponseBody {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
+        public String getUsername() {
+            return username;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setUsername(String username) {
+            this.username = username;
         }
     }
 }
