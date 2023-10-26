@@ -1,10 +1,12 @@
 package com.example.freelance_be.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.util.Set;
 
 @Entity
+//@SQLDelete()
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

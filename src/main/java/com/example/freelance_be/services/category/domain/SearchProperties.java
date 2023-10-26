@@ -13,7 +13,6 @@ import java.util.Map;
 public class SearchProperties {
     private Long id;
     private String name;
-
     public SearchProperties(Map<String, String> allParams) {
         if(allParams.get("id") != null){
             id = Long.valueOf(allParams.get("id"));
@@ -22,7 +21,6 @@ public class SearchProperties {
            name = allParams.get("name");
         }
     }
-
     public Long getId() {
         return id;
     }

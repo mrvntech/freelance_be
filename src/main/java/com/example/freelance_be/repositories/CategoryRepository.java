@@ -1,7 +1,6 @@
 package com.example.freelance_be.repositories;
 
 import com.example.freelance_be.entities.Category;
-import com.example.freelance_be.entities.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

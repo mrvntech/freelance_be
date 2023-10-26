@@ -31,5 +31,10 @@ logging:
         security: trace
 jwt:
   secretKey: asdfassdfasdfasdfsdfdfasdfasdfasdfsdfasdfsdf
+minio:
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket: vlancer
+  endpoint: http://172.0.0.1:9080
 
 

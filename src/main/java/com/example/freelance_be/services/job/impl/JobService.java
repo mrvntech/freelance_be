@@ -13,12 +13,8 @@ import com.example.freelance_be.repositories.CategoryRepository;
 import com.example.freelance_be.repositories.JobRepository;
 import com.example.freelance_be.repositories.UserRepository;
 import com.example.freelance_be.services.job.IJobService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import com.example.freelance_be.services.job.domain.SearchProperties;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -53,7 +49,12 @@ public class JobService implements IJobService {
         String username = (String) ((Jwt) principal).getClaims().get("username");
         Optional<User> user = userRepository.findByUsername(username);
         user.ifPresentOrElse((existedUser) -> {
-            Job job = modelMapper.map(requestBody, Job.class);
+            Job job = new Job();
+            job.setBudget(requestBody.getBudget());
+            job.setName(requestBody.getName());
+            job.setInformation(requestBody.getInformation());
+            job.setImageUrl(requestBody.getInformation());
+            System.out.println(job.getId());
             job.setCustomer(existedUser);
             Optional<Category> category = categoryRepository.findById(requestBody.getCategoryId());
             category.ifPresentOrElse(job::setCategory, () -> {
@@ -71,11 +72,14 @@ public class JobService implements IJobService {
 
     @Override
     public GetAllJobResponseBody getAllJob(Map<String, String> allParams) {
-        List<Job> jobs = jobRepository.findAll();
+        SearchProperties searchProperties = new SearchProperties(allParams);
+        System.out.println(allParams);
+        List<Job> jobs = jobRepository.findAll(searchProperties.getJobSpecification());
         GetAllJobResponseBody responseBody = new GetAllJobResponseBody();
+        System.out.println(jobs.size());
         responseBody.setJobs(jobs.stream().map((job)-> {
             return modelMapper.map(job, com.example.freelance_be.services.job.domain.Job.class);
-        }).toList());
+        }).collect(Collectors.toList()));
         return responseBody;
     }
 

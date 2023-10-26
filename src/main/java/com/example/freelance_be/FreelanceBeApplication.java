@@ -7,6 +7,7 @@ import com.example.freelance_be.repositories.UserRepository;
 import com.example.freelance_be.services.category.impl.CategoryService;
 import com.example.freelance_be.services.role.impl.RoleService;
 import com.example.freelance_be.services.user.impl.UserService;
+import com.example.freelance_be.utils.MinioConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +31,8 @@ public class FreelanceBeApplication {
 		Category fe = new Category();
 		fe.setName("FE");
 		categoryRepository.saveAll(List.of(be, fe));
+		MinioConfig minioConfig = applicationContext.getBean(MinioConfig.class);
+		System.out.println(minioConfig.toString());
 	}
 
 }

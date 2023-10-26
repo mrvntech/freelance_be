@@ -5,8 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - database
-      - minio
+      database:
+        condition: service_healthy
+      minio:
+        condition: service_started
     environment:
       - spring.datasource.url=jdbc:mysql://backend_database:3306/freelance_be
     ports:
@@ -23,16 +25,18 @@ services:
       - MYSQL_ROOT_PASSWORD=Godfather@2.0
     networks:
       - freelance_be
-#  minio:
-#    image: minio/minio
-#    command: server /data --console-address ":9001"
-#    ports:
-#      - 127.0.0.1:9001:9001
-#      - 127.0.0.1:9000:9000
-#    environment:
-#      - console-address=:9001
-#    volumes:
-#      - C:\Users\mrvnt\docker\minio\data:/data
-
+    healthcheck:
+      test: "mysql --user=root --password=Godfather@2.0"
+  minio:
+    container_name: minio
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    ports:
+      - 127.0.0.1:9080:9001
+      - 127.0.0.1:9081:9000
+    environment:
+      - console-address=:9001
+    volumes:
+      - C:\Users\mrvnt\docker\minio\data:/data
 networks:
   freelance_be:

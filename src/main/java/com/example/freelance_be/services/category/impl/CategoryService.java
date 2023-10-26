@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @Service
 public class CategoryService implements ICategoryService {
