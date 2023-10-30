@@ -16,6 +16,32 @@ public class Job {
     private String imageUrl;
     private Date date;
     private String status;
+    private String typeOfEmployee;
+    private String jobLevel;
+
+    public String getTypeOfEmployee() {
+        return typeOfEmployee;
+    }
+
+    public void setTypeOfEmployee(String typeOfEmployee) {
+        this.typeOfEmployee = typeOfEmployee;
+    }
+
+    public String getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(String jobLevel) {
+        this.jobLevel = jobLevel;
+    }
+
+    public Set<User> getAppliers() {
+        return appliers;
+    }
+
+    public void setAppliers(Set<User> appliers) {
+        this.appliers = appliers;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -113,5 +139,23 @@ public class Job {
 
     public void setFreelancer(User freelancer) {
         this.freelancer = freelancer;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", budget=" + budget +
+                ", information='" + information + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", date=" + date +
+                ", status='" + status + '\'' +
+                ", typeOfEmployee='" + typeOfEmployee + '\'' +
+                ", jobLevel='" + jobLevel + '\'' +
+                ", category=" + category +
+                ", customer=" + customer +
+                ", freelancer=" + freelancer +
+                '}';
     }
 }

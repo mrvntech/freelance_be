@@ -10,9 +10,28 @@ public class CreateJobRequestBody {
     private Double budget;
     @NotNull(message = "information is required")
     private String information;
-
     @NotNull(message = "categoryId is required")
     private Long categoryId;
+    @NotNull(message = "type of employee is required")
+    private String typeOfEmployee;
+    @NotNull(message = "job level is required")
+    private String jobLevel;
+
+    public String getTypeOfEmployee() {
+        return typeOfEmployee;
+    }
+
+    public void setTypeOfEmployee(String typeOfEmployee) {
+        this.typeOfEmployee = typeOfEmployee;
+    }
+
+    public String getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(String jobLevel) {
+        this.jobLevel = jobLevel;
+    }
 
     public Long getCategoryId() {
         return categoryId;

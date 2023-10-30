@@ -35,6 +35,6 @@ minio:
   accessKey: minioadmin
   secretKey: minioadmin
   bucket: vlancer
-  endpoint: http://172.0.0.1:9080
+  endpoint: http://localhost:9080
 
 
