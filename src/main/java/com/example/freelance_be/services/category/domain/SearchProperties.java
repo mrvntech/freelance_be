@@ -16,6 +16,7 @@ public class SearchProperties {
     public SearchProperties(Map<String, String> allParams) {
         if(allParams.get("id") != null){
             id = Long.valueOf(allParams.get("id"));
+            System.out.println(id);
         }
         if(allParams.get("name") != null) {
            name = allParams.get("name");

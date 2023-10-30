@@ -23,28 +23,28 @@ public class MinioConfig {
     public String getEndpoint() {
         return endpoint;
     }
-//    @Bean
-//    public MinioClient minioClient() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-//        MinioClient client =  MinioClient.builder()
-//                .endpoint(endpoint)
-//                .credentials(accessKey, secretKey)
-//                .build();
-//        try{
-//            System.out.println("asdfasdfasdf");
-//            System.out.println(bucket);
-//            System.out.println(toString());
-//            boolean found =
-//                    client.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
-//            if (!found) {
-//                client.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
-//            } else {
-//                System.out.println("Bucket already exists.");
-//        }
-//        }catch (Exception exception){
-//            System.out.println(exception.toString());
-//        }
-//        return client;
-//    }
+    @Bean
+    public MinioClient minioClient() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        MinioClient client =  MinioClient.builder()
+                .endpoint(endpoint)
+                .credentials(accessKey, secretKey)
+                .build();
+        try{
+            System.out.println("asdfasdfasdf");
+            System.out.println(bucket);
+            System.out.println(toString());
+            boolean found =
+                    client.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
+            if (!found) {
+                client.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
+            } else {
+                System.out.println("Bucket already exists.");
+        }
+        }catch (Exception exception){
+            System.out.println(exception.toString());
+        }
+        return client;
+    }
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;

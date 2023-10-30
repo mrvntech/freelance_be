@@ -65,4 +65,14 @@ public class User {
     public void setProvider(String provider) {
         this.provider = provider;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", provider='" + provider + '\'' +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.freelance_be.services.job.domain;
+package com.example.freelance_be.services.job.impl.getalljob;
 
 import com.example.freelance_be.entities.Category;
 import jakarta.persistence.criteria.*;
