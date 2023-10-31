@@ -1,16 +1,40 @@
 package com.example.freelance_be.dto.response.job;
 
+import java.util.List;
+
 public class GetJobResponseBody {
     private Long id;
     private String name;
     private Double budget;
     private String information;
-    private Job.Category category;
-    private Customer customer;
-    public Job.Category getCategory() {
+    private Category category;
+    private User customer;
+    private User freelancer;
+    private String typeOfEmployee;
+    private String imageUrl;
+    private String jobLevel;
+    private List<User> appliers;
+
+    public User getFreelancer() {
+        return freelancer;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setFreelancer(User freelancer) {
+        this.freelancer = freelancer;
+    }
+
+    public Category getCategory() {
         return category;
     }
-    public void setCategory(Job.Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     public Long getId() {
@@ -38,12 +62,36 @@ public class GetJobResponseBody {
         this.information = information;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
+    }
+
+    public String getTypeOfEmployee() {
+        return typeOfEmployee;
+    }
+
+    public void setTypeOfEmployee(String typeOfEmployee) {
+        this.typeOfEmployee = typeOfEmployee;
+    }
+
+    public String getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(String jobLevel) {
+        this.jobLevel = jobLevel;
+    }
+
+    public List<User> getAppliers() {
+        return appliers;
+    }
+
+    public void setAppliers(List<User> appliers) {
+        this.appliers = appliers;
     }
 
     public static class Category {
@@ -72,7 +120,17 @@ public class GetJobResponseBody {
         private Double budget;
         private String information;
         private Category category;
-        private Customer customer;
+        private User customer;
+        private User freelancer;
+
+        public User getFreelancer() {
+            return freelancer;
+        }
+
+        public void setFreelancer(User freelancer) {
+            this.freelancer = freelancer;
+        }
+
         public Category getCategory() {
             return category;
         }
@@ -104,11 +162,11 @@ public class GetJobResponseBody {
             this.information = information;
         }
 
-        public Customer getCustomer() {
+        public User getCustomer() {
             return customer;
         }
 
-        public void setCustomer(Customer customer) {
+        public void setCustomer(User customer) {
             this.customer = customer;
         }
 
@@ -133,8 +191,17 @@ public class GetJobResponseBody {
             }
         }
     }
-    public static class Customer {
+    public static class User {
         private String username;
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
 
         public String getUsername() {
             return username;

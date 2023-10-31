@@ -15,10 +15,14 @@ import java.security.NoSuchAlgorithmException;
 @Configuration
 @ConfigurationProperties(prefix = "minio")
 public class MinioConfig {
-    private String endpoint;
-    private String accessKey;
-    private String secretKey;
-    private String bucket;
+    public static String endpoint;
+    public static String accessKey;
+    public static String secretKey;
+    public static String bucket;
+//    private String endpoint;
+//    private String accessKey;
+//    private String secretKey;
+//    private String bucket;
 
     public String getEndpoint() {
         return endpoint;
@@ -29,14 +33,12 @@ public class MinioConfig {
                 .endpoint(endpoint)
                 .credentials(accessKey, secretKey)
                 .build();
+
         try{
-            System.out.println("asdfasdfasdf");
-            System.out.println(bucket);
-            System.out.println(toString());
             boolean found =
                     client.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
             if (!found) {
-                client.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
+                client.makeBucket(MakeBucketArgs.builder().bucket(bucket).objectLock(false).build());
             } else {
                 System.out.println("Bucket already exists.");
         }
@@ -65,7 +67,7 @@ public class MinioConfig {
     }
 
     public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
+        MinioConfig.accessKey = accessKey;
     }
 
     public String getSecretKey() {
@@ -73,7 +75,7 @@ public class MinioConfig {
     }
 
     public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
+        MinioConfig.secretKey = secretKey;
     }
 
     public String getBucket() {
@@ -81,6 +83,6 @@ public class MinioConfig {
     }
 
     public void setBucket(String bucket) {
-        this.bucket = bucket;
+        MinioConfig.bucket = bucket;
     }
 }

@@ -6,7 +6,6 @@ import org.hibernate.annotations.SQLDelete;
 import java.util.Set;
 
 @Entity
-//@SQLDelete()
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +13,15 @@ public class User {
     private String username;
     private String password;
     private String provider;
+    private String level;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -21,11 +29,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
-
-//    @ManyToMany(targetEntity = Job.class, fetch = FetchType.LAZY)
-//    @JoinTable(name = "apply_job",
-//    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-
     public Long getId() {
         return id;
     }

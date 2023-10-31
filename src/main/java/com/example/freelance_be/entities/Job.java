@@ -3,7 +3,7 @@ package com.example.freelance_be.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "job")
 public class Job {
@@ -35,11 +35,11 @@ public class Job {
         this.jobLevel = jobLevel;
     }
 
-    public Set<User> getAppliers() {
+    public List<User> getAppliers() {
         return appliers;
     }
 
-    public void setAppliers(Set<User> appliers) {
+    public void setAppliers(List<User> appliers) {
         this.appliers = appliers;
     }
 
@@ -83,7 +83,7 @@ public class Job {
     @ManyToMany(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "applierId", referencedColumnName = "id"))
-    private Set<User> appliers;
+    private List<User> appliers;
 
     public Long getId() {
         return id;
