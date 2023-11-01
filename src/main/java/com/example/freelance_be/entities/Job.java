@@ -13,7 +13,7 @@ public class Job {
     private String name;
     private Double budget;
     private String information;
-    private String imageUrl;
+    private String imageObject;
     private Date date;
     private String status;
     private String typeOfEmployee;
@@ -43,12 +43,12 @@ public class Job {
         this.appliers = appliers;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageObject() {
+        return imageObject;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageObject(String imageObject) {
+        this.imageObject = imageObject;
     }
 
     public Date getDate() {
@@ -148,7 +148,7 @@ public class Job {
                 ", name='" + name + '\'' +
                 ", budget=" + budget +
                 ", information='" + information + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
+                ", imageUrl='" + imageObject + '\'' +
                 ", date=" + date +
                 ", status='" + status + '\'' +
                 ", typeOfEmployee='" + typeOfEmployee + '\'' +

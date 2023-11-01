@@ -5,18 +5,15 @@ import com.example.freelance_be.exception.exception.BadRequestException;
 import com.example.freelance_be.repositories.JobRepository;
 import com.example.freelance_be.services.job.IUploadImageService;
 import com.example.freelance_be.utils.MinioConfig;
-import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.errors.*;
-import io.minio.http.Method;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class UploadImageService implements IUploadImageService {
@@ -34,7 +31,7 @@ public class UploadImageService implements IUploadImageService {
     public boolean uploadImage(Long jobId, MultipartFile file) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         String imageUrl = jobImageUrlCreator.createImageUrl(jobId, file.getOriginalFilename());
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job do not existed"));
-        job.setImageUrl(imageUrl);
+        job.setImageObject(imageUrl);
         jobRepository.save(job);
         minioClient.putObject(PutObjectArgs
                 .builder()

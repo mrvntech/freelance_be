@@ -41,7 +41,7 @@ public class JobController {
     }
 
     @GetMapping("")
-    public ResponseEntity<GetJobResponseBody> getJob(@RequestParam Map<String, String> allParams){
+    public ResponseEntity<GetJobResponseBody> getJob(@RequestParam Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return ResponseEntity.ok().body(jobService.getJob(allParams));
     }
     @PostMapping("/{id}/apply")

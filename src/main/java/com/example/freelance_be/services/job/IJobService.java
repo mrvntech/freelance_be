@@ -17,7 +17,7 @@ import java.util.Map;
 
 public interface IJobService {
     CreateJobResponseBody createJob(CreateJobRequestBody requestBody);
-    GetJobResponseBody getJob(Map<String, String> allParams);
+    GetJobResponseBody getJob(Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     GetAllJobResponseBody getAllJob(Map<String, String> allParams);
     boolean uploadImageUrl(Long jobId, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     void applyJob(Long jobId);

@@ -19,6 +19,16 @@ public class GetAllJobResponseBody {
         private String information;
         private Category category;
         private Customer customer;
+        private String imageUrl;
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
         public Category getCategory() {
             return category;
         }

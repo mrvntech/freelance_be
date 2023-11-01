@@ -81,8 +81,12 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public GetJobResponseBody getJob(Map<String, String> allParams) {
+    public GetJobResponseBody getJob(Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         Job job = getJobService.getJob(Long.valueOf(allParams.get("id")));
-        return jobToGetJobResponseConverter.convert(job);
+        GetJobResponseBody responseBody = jobToGetJobResponseConverter.convert(job);
+        if(job.getImageObject() != null){
+            responseBody.setImageUrl(getJobImageUrl(job.getId()));
+        }
+        return responseBody;
     }
 }

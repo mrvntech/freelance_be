@@ -31,7 +31,7 @@ public class GetImageUrlService implements IGetImageUrlService {
         return minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
                         .bucket(MinioConfig.bucket)
-                        .object(job.getImageUrl())
+                        .object(job.getImageObject())
                         .method(Method.GET)
                         .expiry(60, TimeUnit.SECONDS)
                         .build()
