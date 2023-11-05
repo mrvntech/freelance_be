@@ -1,5 +1,6 @@
 package com.example.freelance_be.services.user.impl;
 
+import com.example.freelance_be.dto.request.user.UpdateUserProfileRequestBody;
 import com.example.freelance_be.dto.response.job.CreateJobResponseBody;
 import com.example.freelance_be.dto.response.user.GetUserProfileResponseBody;
 import com.example.freelance_be.dto.response.user.UpdateUserProfileResponseBody;
@@ -56,7 +57,14 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UpdateUserProfileResponseBody updateUserProfile() {
-        return null;
+    public UpdateUserProfileResponseBody updateUserProfile(UpdateUserProfileRequestBody requestBody) {
+        User user = userRepository.findByUsername(requestBody.getUsername()).orElseThrow(()->new BadRequestException("user do not existed"));
+        user.setAge(requestBody.getAge());
+        user.setSkill(requestBody.getSkill());
+        user.setAddress(requestBody.getAddress());
+        user.setLevel(requestBody.getLevel());
+        user.setDescription(requestBody.getDescription());
+        userRepository.save(user);
+        return modelMapper.map(user, UpdateUserProfileResponseBody.class);
     }
 }
