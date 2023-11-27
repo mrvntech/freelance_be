@@ -13,11 +13,45 @@ public class Job {
     private String name;
     private Double budget;
     private String information;
-    private String imageObject;
-    private Date date;
+    private Date postDate;
     private String status;
     private String typeOfEmployee;
-    private String jobLevel;
+    private String createdAt;
+    private String assignedAt;
+    @ManyToOne
+    private Level jobLevel;
+    @ManyToOne
+    private WorkingType workingType;
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private User customer;
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public WorkingType getWorkingType() {
+        return workingType;
+    }
+
+    public void setWorkingType(WorkingType workingType) {
+        this.workingType = workingType;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getAssignedAt() {
+        return assignedAt;
+    }
+
+    public void setAssignedAt(String assignedAt) {
+        this.assignedAt = assignedAt;
+    }
 
     public String getTypeOfEmployee() {
         return typeOfEmployee;
@@ -27,11 +61,11 @@ public class Job {
         this.typeOfEmployee = typeOfEmployee;
     }
 
-    public String getJobLevel() {
+    public Level getJobLevel() {
         return jobLevel;
     }
 
-    public void setJobLevel(String jobLevel) {
+    public void setJobLevel(Level jobLevel) {
         this.jobLevel = jobLevel;
     }
 
@@ -43,20 +77,12 @@ public class Job {
         this.appliers = appliers;
     }
 
-    public String getImageObject() {
-        return imageObject;
+    public Date getPostDate() {
+        return postDate;
     }
 
-    public void setImageObject(String imageObject) {
-        this.imageObject = imageObject;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
 
     public String getStatus() {
@@ -67,14 +93,6 @@ public class Job {
         this.status = status;
     }
 
-    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
-
-
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private User customer;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "freelancer_id", referencedColumnName = "id")
@@ -139,23 +157,5 @@ public class Job {
 
     public void setFreelancer(User freelancer) {
         this.freelancer = freelancer;
-    }
-
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", budget=" + budget +
-                ", information='" + information + '\'' +
-                ", imageUrl='" + imageObject + '\'' +
-                ", date=" + date +
-                ", status='" + status + '\'' +
-                ", typeOfEmployee='" + typeOfEmployee + '\'' +
-                ", jobLevel='" + jobLevel + '\'' +
-                ", category=" + category +
-                ", customer=" + customer +
-                ", freelancer=" + freelancer +
-                '}';
     }
 }

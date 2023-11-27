@@ -1,11 +1,8 @@
 package com.example.freelance_be.services.user.impl;
 
 import com.example.freelance_be.dto.request.user.UpdateUserProfileRequestBody;
-import com.example.freelance_be.dto.response.job.CreateJobResponseBody;
 import com.example.freelance_be.dto.response.user.GetUserProfileResponseBody;
 import com.example.freelance_be.dto.response.user.UpdateUserProfileResponseBody;
-import com.example.freelance_be.entities.Category;
-import com.example.freelance_be.entities.Job;
 import com.example.freelance_be.entities.Role;
 import com.example.freelance_be.entities.User;
 import com.example.freelance_be.exception.exception.AuthenticationException;

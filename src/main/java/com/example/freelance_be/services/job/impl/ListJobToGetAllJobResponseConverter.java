@@ -27,15 +27,8 @@ public class ListJobToGetAllJobResponseConverter extends Converter<List<Job>, Ge
         GetAllJobResponseBody responseBody = new GetAllJobResponseBody();
         responseBody.setJobs(jobs.stream().map((job)-> {
             GetAllJobResponseBody.Job responseJob = modelMapper.map(job, GetAllJobResponseBody.Job.class);
-            if(job.getImageObject() != null){
-                try {
-                    responseJob.setImageUrl(getImageUrlService.getImageUrl(job.getId()));
-                } catch (ServerException | InsufficientDataException | ErrorResponseException | IOException |
-                         NoSuchAlgorithmException | InvalidKeyException | InvalidResponseException |
-                         XmlParserException | InternalException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            responseJob.setCategoryName(job.getCategory().getName());
+            responseJob.setOwner(new GetAllJobResponseBody.Owner(1L, "phucnq", ""));
             return responseJob;
         }).collect(Collectors.toList()));
         return responseBody;

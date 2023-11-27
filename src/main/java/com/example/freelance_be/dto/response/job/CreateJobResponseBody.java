@@ -7,9 +7,26 @@ public class CreateJobResponseBody {
     private String name;
     private Double budget;
     private String information;
-    private String imageUrl;
-    private Date date;
+    private Date postDate;
     private String status;
+    private String typeOfEmployee;
+    private String jobLevel;
+
+    public String getTypeOfEmployee() {
+        return typeOfEmployee;
+    }
+
+    public void setTypeOfEmployee(String typeOfEmployee) {
+        this.typeOfEmployee = typeOfEmployee;
+    }
+
+    public String getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(String jobLevel) {
+        this.jobLevel = jobLevel;
+    }
 
     public Long getId() {
         return id;
@@ -43,20 +60,12 @@ public class CreateJobResponseBody {
         this.information = information;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Date getPostDate() {
+        return postDate;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
 
     public String getStatus() {

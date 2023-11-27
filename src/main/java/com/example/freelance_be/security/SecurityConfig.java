@@ -47,6 +47,8 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "categories")
 //                    .hasAuthority(Role.ADMIN.getName())
                     .authenticated()
+                    .requestMatchers("/applications")
+                    .authenticated()
                     .anyRequest()
                     .permitAll();
         });

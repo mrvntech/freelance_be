@@ -12,8 +12,4 @@ public class MyJobController {
     public String getMyJobs(){
         return "get my job success";
     }
-
-//    @PostMapping("")
-//    public
-
 }

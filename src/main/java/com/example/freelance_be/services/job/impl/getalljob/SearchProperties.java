@@ -1,10 +1,6 @@
 package com.example.freelance_be.services.job.impl.getalljob;
 
-import com.example.freelance_be.entities.Category;
-import jakarta.persistence.criteria.*;
-import org.springframework.data.jpa.domain.Specification;
-import com.example.freelance_be.entities.Job;
-import static org.springframework.data.jpa.domain.Specification.where;
+import com.example.freelance_be.utils.Role;
 
 import java.util.Map;
 
@@ -13,9 +9,44 @@ public class SearchProperties {
     private String name;
     private Long categoryId;
     private String categoryName;
+    private Role role;
+    private String customerId;
+    private String freelancerId;
+    private String jobLevel;
+    private String typeOfEmployee;
+    public String getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(String jobLevel) {
+        this.jobLevel = jobLevel;
+    }
+
+    public String getTypeOfEmployee() {
+        return typeOfEmployee;
+    }
+
+    public void setTypeOfEmployee(String typeOfEmployee) {
+        this.typeOfEmployee = typeOfEmployee;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getFreelancerId() {
+        return freelancerId;
+    }
+
+    public void setFreelancerId(String freelancerId) {
+        this.freelancerId = freelancerId;
+    }
 
     public SearchProperties(Map<String, String> allParams) {
-        System.out.println(allParams);
         if(allParams.get("id") != null){
             id = Long.valueOf(allParams.get("id"));
         }
@@ -27,6 +58,12 @@ public class SearchProperties {
         }
         if(allParams.get("categoryName") != null){
             categoryName = allParams.get("categoryName");
+        }
+
+        if(allParams.get("role") != null){
+            Role.getRole(Integer.parseInt(allParams.get("role"))).ifPresent((userRole -> {
+                role = userRole;
+            }));
         }
     }
 
@@ -58,33 +95,15 @@ public class SearchProperties {
         return categoryName;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public Specification<Job> hasId(Long id){
-        return new Specification<Job>() {
-            @Override
-            public Predicate toPredicate(Root<Job> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.equal(root.get("id"), id);
-            }
-        };
-    }
-    public Specification<Job> hasCategoryName(String categoryName){
-        return new Specification<Job>() {
-            @Override
-            public Predicate toPredicate(Root<Job> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                Join<Job, Category> jobCategory = root.join("category");
-                return criteriaBuilder.equal(jobCategory.get("name"), categoryName);
-            }
-        };
-    }
-
-    public Specification<Job> getJobSpecification(){
-        Specification<Job> searchSpecification = null;
-        if(id != null)searchSpecification = where(hasId(id));
-        if(categoryName != null && searchSpecification == null)searchSpecification = where(hasCategoryName(categoryName));
-        else if (categoryName != null) searchSpecification.and(hasCategoryName(categoryName));
-        return searchSpecification;
     }
 }

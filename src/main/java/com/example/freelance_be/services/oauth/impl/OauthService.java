@@ -29,25 +29,10 @@ public class OauthService implements IOauthService {
         this.jwtEncoder = jwtEncoder;
     }
 
-//    @Override
-//    public OauthResponseBody authenticationWithGoogleCode(String code) {
-//        try{
-//            GoogleAuthorizationCodeTokenRequest googleAuthorizationCodeTokenRequest = new GoogleAuthorizationCodeTokenRequest(
-//                    new NetHttpTransport(), new GsonFactory(),
-//                    googleOauthConfig.getClientId(), googleOauthConfig.getClientSecret(),code, googleOauthConfig.getRedirectUri()
-//            );
-//            GoogleTokenResponse response = googleAuthorizationCodeTokenRequest.execute();
-//            GoogleIdToken googleIdToken = response.parseIdToken();
-//            Optional<User> user = userRepository.findByUsername(googleIdToken.getPayload().getEmail());
-//
-//        }catch (Exception exception){
-//            System.out.println(exception.toString());
-//        }
-//    }
     public AuthenticationResponseBody verifyIdToken(AuthenticationRequestBody body) throws GeneralSecurityException, IOException {
-        System.out.println(body);
         GoogleIdTokenVerifier googleIdTokenVerifier = new GoogleIdTokenVerifier(new NetHttpTransport(),new GsonFactory());
-        googleIdTokenVerifier.verify(body.getTokenId());
+        GoogleIdToken googleIdToken = googleIdTokenVerifier.verify(body.getTokenId());
+        System.out.println(googleIdToken);
         Optional<User> existedUser = userRepository.findByUsername(body.getUsername());
         if(existedUser.isEmpty()){
             User newUser = new User();

@@ -3,6 +3,7 @@ package com.example.freelance_be.utils;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
+import io.minio.SetBucketPolicyArgs;
 import io.minio.errors.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,10 +20,6 @@ public class MinioConfig {
     public static String accessKey;
     public static String secretKey;
     public static String bucket;
-//    private String endpoint;
-//    private String accessKey;
-//    private String secretKey;
-//    private String bucket;
 
     public String getEndpoint() {
         return endpoint;
@@ -33,12 +30,27 @@ public class MinioConfig {
                 .endpoint(endpoint)
                 .credentials(accessKey, secretKey)
                 .build();
-
         try{
             boolean found =
                     client.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
             if (!found) {
                 client.makeBucket(MakeBucketArgs.builder().bucket(bucket).objectLock(false).build());
+
+                client.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(bucket).config("{\n" +
+                        "    \"Version\": \"2012-10-17\",\n" +
+                        "    \"Statement\": [\n" +
+                        "        {\n" +
+                        "            \"Effect\": \"Allow\",\n" +
+                        "            \"Principal\": \"*\"," +
+                        "            \"Action\": [\n" +
+                        "                \"s3:*\"\n" +
+                        "            ],\n" +
+                        "            \"Resource\": [\n" +
+                        "                \"arn:aws:s3:::*\"\n" +
+                        "            ]\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}").build());
             } else {
                 System.out.println("Bucket already exists.");
         }

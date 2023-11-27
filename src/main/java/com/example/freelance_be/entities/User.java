@@ -18,6 +18,24 @@ public class User {
     private String skill;
     private Integer age;
     private String image;
+    private boolean isActive;
+    private String avatarUrl;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public String getAddress() {
         return address;
@@ -75,6 +93,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
+    private Set<Category> categories;
+
+    @ManyToOne
     public Long getId() {
         return id;
     }
@@ -113,15 +136,5 @@ public class User {
 
     public void setProvider(String provider) {
         this.provider = provider;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", provider='" + provider + '\'' +
-                '}';
     }
 }

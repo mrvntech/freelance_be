@@ -28,13 +28,14 @@ public class GetImageUrlService implements IGetImageUrlService {
     @Override
     public String getImageUrl(Long jobId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job do not existed"));
-        return minioClient.getPresignedObjectUrl(
-                GetPresignedObjectUrlArgs.builder()
-                        .bucket(MinioConfig.bucket)
-                        .object(job.getImageObject())
-                        .method(Method.GET)
-                        .expiry(60, TimeUnit.SECONDS)
-                        .build()
-        );
+//        return minioClient.getPresignedObjectUrl(
+//                GetPresignedObjectUrlArgs.builder()
+//                        .bucket(MinioConfig.bucket)
+//                        .object(job.getImageObject())
+//                        .method(Method.GET)
+//                        .expiry(60, TimeUnit.SECONDS)
+//                        .build()
+//        );
+        return null;
     }
 }

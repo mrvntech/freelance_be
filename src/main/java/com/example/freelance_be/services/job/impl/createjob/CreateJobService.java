@@ -1,5 +1,6 @@
 package com.example.freelance_be.services.job.impl.createjob;
 
+import com.example.freelance_be.domain.JobStatus;
 import com.example.freelance_be.dto.request.job.CreateJobRequestBody;
 import com.example.freelance_be.entities.Category;
 import com.example.freelance_be.entities.Job;
@@ -13,6 +14,8 @@ import com.example.freelance_be.services.job.ICreateJobService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class CreateJobService implements ICreateJobService {
@@ -36,9 +39,11 @@ public class CreateJobService implements ICreateJobService {
         String username = (String) ((Jwt) principal).getClaims().get("username");
         User authUser = userRepository.findByUsername(username).orElseThrow(() -> new AuthenticationException("authentication error"));
         Job job = requestBodyConverter.convert(requestBody);
+        job.setStatus(JobStatus.OPEN.getName());
         Category category = categoryRepository.findById(requestBody.getCategoryId()).orElseThrow(() -> new BadRequestException("category do not existed"));
         job.setCustomer(authUser);
         job.setCategory(category);
+        job.setPostDate(new Date());
         jobRepository.save(job);
         return job;
     }

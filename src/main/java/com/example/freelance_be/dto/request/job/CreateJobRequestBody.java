@@ -16,6 +16,15 @@ public class CreateJobRequestBody {
     private String typeOfEmployee;
     @NotNull(message = "job level is required")
     private String jobLevel;
+    private String dueDate;
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
 
     public String getTypeOfEmployee() {
         return typeOfEmployee;

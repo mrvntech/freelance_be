@@ -16,6 +16,7 @@ import com.example.freelance_be.services.job.impl.getImageUrl.GetImageUrlService
 import com.example.freelance_be.services.job.impl.hidefreelancer.HideFreelancerService;
 import com.example.freelance_be.services.job.impl.uploadimage.UploadImageService;
 import io.minio.errors.*;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,9 +85,9 @@ public class JobService implements IJobService {
     public GetJobResponseBody getJob(Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         Job job = getJobService.getJob(Long.valueOf(allParams.get("id")));
         GetJobResponseBody responseBody = jobToGetJobResponseConverter.convert(job);
-        if(job.getImageObject() != null){
-            responseBody.setImageUrl(getJobImageUrl(job.getId()));
-        }
+//        if(job.getImageObject() != null){
+//            responseBody.setImageUrl(getJobImageUrl(job.getId()));
+//        }
         return responseBody;
     }
 }
