@@ -10,12 +10,12 @@ public class CreateJobRequestBody {
     private Double budget;
     @NotNull(message = "information is required")
     private String information;
-    @NotNull(message = "categoryId is required")
+    @NotNull(message = "category is required")
     private Long categoryId;
-    @NotNull(message = "type of employee is required")
-    private String typeOfEmployee;
+    @NotNull(message = "working type is required")
+    private Long workingTypeId;
     @NotNull(message = "job level is required")
-    private String jobLevel;
+    private Long levelId;
     private String dueDate;
 
     public String getDueDate() {
@@ -24,22 +24,6 @@ public class CreateJobRequestBody {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public String getTypeOfEmployee() {
-        return typeOfEmployee;
-    }
-
-    public void setTypeOfEmployee(String typeOfEmployee) {
-        this.typeOfEmployee = typeOfEmployee;
-    }
-
-    public String getJobLevel() {
-        return jobLevel;
-    }
-
-    public void setJobLevel(String jobLevel) {
-        this.jobLevel = jobLevel;
     }
 
     public Long getCategoryId() {
@@ -72,5 +56,21 @@ public class CreateJobRequestBody {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public Long getWorkingTypeId() {
+        return workingTypeId;
+    }
+
+    public void setWorkingTypeId(Long workingTypeId) {
+        this.workingTypeId = workingTypeId;
+    }
+
+    public Long getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Long levelId) {
+        this.levelId = levelId;
     }
 }

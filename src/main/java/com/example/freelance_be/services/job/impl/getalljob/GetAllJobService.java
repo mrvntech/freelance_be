@@ -30,15 +30,16 @@ public class GetAllJobService implements IGetAllJobService {
     public List<Job> getAllJob(Map<String, String> allParams) {
         SearchProperties searchProperties = new SearchProperties(allParams);
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(!(principal instanceof Jwt)){
-            return jobRepository.findAll(searchProperties.getCategoryId(), null, null, null);
-        }
-        String email = (String) ((Jwt) principal).getClaims().get("username");
-        User user = userRepository.findByUsername(email).orElseThrow(() -> new AuthenticationException("authentication error"));
-        if(searchProperties.getRole() == null)throw new BadRequestException("role do not exits");
-        if(searchProperties.getRole() == Role.CUSTOMER){
-            return jobRepository.findAll(searchProperties.getCategoryId(), user.getId(), null, null);
-        }
-        return jobRepository.findAll(searchProperties.getCategoryId(), null, user.getId(), null);
+//        if(!(principal instanceof Jwt)){
+//            return jobRepository.findAll(searchProperties.getCategoryId(), null, null, null);
+//        }
+//        String email = (String) ((Jwt) principal).getClaims().get("username");
+//        User user = userRepository.findByEmail(email).orElseThrow(() -> new AuthenticationException("authentication error"));
+//        if(searchProperties.getRole() == null)throw new BadRequestException("role do not exits");
+//        if(searchProperties.getRole() == Role.CUSTOMER){
+//            return jobRepository.findAll(searchProperties.getCategoryId(), user.getId(), null, null);
+//        }
+//        return jobRepository.findAll(searchProperties.getCategoryId(), null, user.getId(), null);
+        return null;
     }
 }

@@ -22,17 +22,17 @@ public class FreelanceBeApplication {
 		ApplicationContext applicationContext = SpringApplication.run(FreelanceBeApplication.class, args);
 
 		RoleService roleService = applicationContext.getBean(RoleService.class);
-		roleService.initRole();
-		UserService userService = applicationContext.getBean(UserService.class);
-		userService.initAdminAccount();
-		CategoryRepository categoryRepository = applicationContext.getBean(CategoryRepository.class);
-		Category be = new Category();
-		be.setName("BE");
-		Category fe = new Category();
-		fe.setName("FE");
-		categoryRepository.saveAll(List.of(be, fe));
-		MinioConfig minioConfig = applicationContext.getBean(MinioConfig.class);
-		System.out.println(minioConfig.toString());
+//		roleService.initRole();
+//		UserService userService = applicationContext.getBean(UserService.class);
+//		userService.initAdminAccount();
+//		CategoryRepository categoryRepository = applicationContext.getBean(CategoryRepository.class);
+//		Category be = new Category();
+//		be.setName("BE");
+//		Category fe = new Category();
+//		fe.setName("FE");
+//		categoryRepository.saveAll(List.of(be, fe));
+//		MinioConfig minioConfig = applicationContext.getBean(MinioConfig.class);
+//		System.out.println(minioConfig.toString());
 	}
 
 }

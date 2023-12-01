@@ -2,18 +2,21 @@ package com.example.freelance_be.entities;
 
 import jakarta.persistence.*;
 
-@Entity
-public class Review {
+import java.util.Date;
+
+@Entity(name = "user_report")
+public class UserReport {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private Double rate;
-    @ManyToOne
-    @JoinColumn(name = "writer_id", referencedColumnName = "id")
-    private User writer;
+    private Date createAt;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
 
     public Long getId() {
         return id;
@@ -31,20 +34,12 @@ public class Review {
         this.content = content;
     }
 
-    public Double getRate() {
-        return rate;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-
-    public User getWriter() {
-        return writer;
-    }
-
-    public void setWriter(User writer) {
-        this.writer = writer;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     public User getUser() {
@@ -53,5 +48,13 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

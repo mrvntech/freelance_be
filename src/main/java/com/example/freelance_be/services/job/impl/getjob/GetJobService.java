@@ -18,6 +18,7 @@ public class GetJobService implements IGetJobService {
 
     @Override
     public Job getJob(Long id) {
-        return jobRepository.findJob(id, "FE").orElseThrow(() -> new BadRequestException("job do not existed"));
+//        return jobRepository.findJob(id, "FE").orElseThrow(() -> new BadRequestException("job do not existed"));
+        return null;
     }
 }

@@ -22,7 +22,6 @@ public class HideFreelancerService implements IHideFreelancerService {
     public boolean hideFreelancer(Long jobId, HideFreelancerRequestBody requestBody){
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job is not existed"));
         User freelancer = userRepository.findById(requestBody.getFreelancerId()).orElseThrow(() -> new BadRequestException("freelancer do not existed"));
-        job.setFreelancer(freelancer);
         jobRepository.save(job);
         return true;
     }

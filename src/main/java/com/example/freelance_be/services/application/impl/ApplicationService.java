@@ -36,7 +36,7 @@ public class ApplicationService implements IApplicationService {
             throw new AuthenticationException("Authentication Error");
         }
         String username = (String) ((Jwt) principal).getClaims().get("username");
-        User authUser = userRepository.findByUsername(username).orElseThrow(() -> new AuthenticationException("authentication error"));
+        User authUser = userRepository.findByEmail(username).orElseThrow(() -> new AuthenticationException("authentication error"));
         Application application = new Application();
         Job job = jobRepository.findById(body.getJobId()).orElseThrow(() -> new BadRequestException(""));
         application.setJob(job);
@@ -56,7 +56,7 @@ public class ApplicationService implements IApplicationService {
             throw new AuthenticationException("Authentication Error");
         }
         String username = (String) ((Jwt) principal).getClaims().get("username");
-        User authUser = userRepository.findByUsername(username).orElseThrow(() -> new AuthenticationException("authentication error"));
+        User authUser = userRepository.findByEmail(username).orElseThrow(() -> new AuthenticationException("authentication error"));
         System.out.println(applicationRepository.findByUserId(authUser.getId()));
         return null;
     }

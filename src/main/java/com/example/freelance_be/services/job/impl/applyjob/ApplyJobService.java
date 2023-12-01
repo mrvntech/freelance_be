@@ -25,15 +25,12 @@ public class ApplyJobService implements IApplyJobService {
     @Override
     public void applyJob(Long jobId) {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job do not exited"));
-        List<User> appliers = job.getAppliers();
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(!(principal instanceof Jwt)){
             throw new AuthenticationException("Authentication Error");
         }
         String username = (String) ((Jwt) principal).getClaims().get("username");
-        User authUser = userRepository.findByUsername(username).orElseThrow(() -> new AuthenticationException("authentication error"));
-        appliers.add(authUser);
-        job.setAppliers(appliers);
+        User authUser = userRepository.findByEmail(username).orElseThrow(() -> new AuthenticationException("authentication error"));
         jobRepository.save(job);
     }
 }

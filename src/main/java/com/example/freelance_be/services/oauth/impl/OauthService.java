@@ -33,10 +33,10 @@ public class OauthService implements IOauthService {
         GoogleIdTokenVerifier googleIdTokenVerifier = new GoogleIdTokenVerifier(new NetHttpTransport(),new GsonFactory());
         GoogleIdToken googleIdToken = googleIdTokenVerifier.verify(body.getTokenId());
         System.out.println(googleIdToken);
-        Optional<User> existedUser = userRepository.findByUsername(body.getUsername());
+        Optional<User> existedUser = userRepository.findByEmail(body.getUsername());
         if(existedUser.isEmpty()){
             User newUser = new User();
-            newUser.setUsername(body.getUsername());
+            newUser.setEmail(body.getUsername());
             userRepository.save(newUser);
         }
         JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256).build();

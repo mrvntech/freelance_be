@@ -1,9 +1,7 @@
 package com.example.freelance_be.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
-import java.util.List;
 
 @Entity(name = "job")
 public class Job {
@@ -13,23 +11,23 @@ public class Job {
     private String name;
     private Double budget;
     private String information;
-    private Date postDate;
+    private String imageUrl;
     private String status;
-    private String typeOfEmployee;
-    private String createdAt;
-    private String assignedAt;
+    private Date createdAt;
     @ManyToOne
-    private Level jobLevel;
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private Level level;
     @ManyToOne
+    @JoinColumn(name = "working_type_id", referencedColumnName = "id")
     private WorkingType workingType;
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User customer;
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -41,48 +39,16 @@ public class Job {
         this.workingType = workingType;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getAssignedAt() {
-        return assignedAt;
+    public Level getLevel() {
+        return level;
     }
 
-    public void setAssignedAt(String assignedAt) {
-        this.assignedAt = assignedAt;
-    }
-
-    public String getTypeOfEmployee() {
-        return typeOfEmployee;
-    }
-
-    public void setTypeOfEmployee(String typeOfEmployee) {
-        this.typeOfEmployee = typeOfEmployee;
-    }
-
-    public Level getJobLevel() {
-        return jobLevel;
-    }
-
-    public void setJobLevel(Level jobLevel) {
-        this.jobLevel = jobLevel;
-    }
-
-    public List<User> getAppliers() {
-        return appliers;
-    }
-
-    public void setAppliers(List<User> appliers) {
-        this.appliers = appliers;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     public String getStatus() {
@@ -92,16 +58,6 @@ public class Job {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "freelancer_id", referencedColumnName = "id")
-    private User freelancer;
-
-    @ManyToMany(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "applierId", referencedColumnName = "id"))
-    private List<User> appliers;
 
     public Long getId() {
         return id;
@@ -151,11 +107,11 @@ public class Job {
         this.customer = customer;
     }
 
-    public User getFreelancer() {
-        return freelancer;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setFreelancer(User freelancer) {
-        this.freelancer = freelancer;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
