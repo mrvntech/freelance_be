@@ -15,7 +15,7 @@ import java.text.ParseException;
 public interface IUserService {
     void initAdminAccount();
     GetUserInformationResponseBody getUserInformation();
-    UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody, MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     GetAllUserInformationResponseBody getAllUser();
     boolean deleteUser(Long id);
 }

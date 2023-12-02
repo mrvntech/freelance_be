@@ -40,8 +40,8 @@ public class UserController {
     }
 
     @PutMapping("")
-    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestPart("form") UpdateUserInformationRequestBody requestBody, @RequestPart("file")MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return ResponseEntity.ok().body(userService.updateUserInformation(requestBody, file));
+    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestPart("form") UpdateUserInformationRequestBody requestBody) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return ResponseEntity.ok().body(userService.updateUserInformation(requestBody));
     }
 
     @DeleteMapping("/{id}")

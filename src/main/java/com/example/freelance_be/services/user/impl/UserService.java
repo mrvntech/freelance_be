@@ -69,7 +69,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody, MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         System.out.println(requestBody.getDateOfBirth());
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(!(principal instanceof Jwt)){
@@ -84,8 +84,8 @@ public class UserService implements IUserService {
         if(requestBody.getGender() != null) user.setGender(requestBody.getGender());
         if(requestBody.getPhoneNumber() != null) user.setPhoneNumber(requestBody.getPhoneNumber());
         if(requestBody.getPassword() != null) user.setPassword(passwordEncoder.encode(requestBody.getPassword()));
-        String imageUrl = minioService.uploadImage(file);
-        user.setImageUrl(imageUrl);
+//        String imageUrl = minioService.uploadImage(file);
+//        user.setImageUrl(imageUrl);
         userRepository.save(user);
         return modelMapper.map(user, UpdateUserInformationResponseBody.class);
     }
