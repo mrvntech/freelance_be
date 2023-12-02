@@ -1,9 +1,13 @@
 package com.example.freelance_be.services.usertask.impl;
 
+import com.example.freelance_be.dto.request.task.UpdateTaskRequestBody;
 import com.example.freelance_be.dto.response.task.GetAllTaskResponseBody;
+import com.example.freelance_be.dto.response.task.GetTaskResponseBody;
+import com.example.freelance_be.dto.response.task.UpdateTaskResponseBody;
 import com.example.freelance_be.entities.Task;
 import com.example.freelance_be.entities.User;
 import com.example.freelance_be.exception.exception.AuthenticationException;
+import com.example.freelance_be.exception.exception.BadRequestException;
 import com.example.freelance_be.repositories.TaskRepository;
 import com.example.freelance_be.repositories.UserRepository;
 import com.example.freelance_be.services.usertask.IUserTaskService;
@@ -38,5 +42,17 @@ public class UserTaskService implements IUserTaskService {
         GetAllTaskResponseBody responseBody = new GetAllTaskResponseBody();
         responseBody.setTasks(taskList.stream().map(task -> modelMapper.map(task, GetAllTaskResponseBody.Task.class)).toList());
         return responseBody;
+    }
+
+    @Override
+    public GetTaskResponseBody getTask(Long id) {
+        return modelMapper.map(taskRepository.findById(id).orElseThrow(() -> new BadRequestException("task do not exist")), GetTaskResponseBody.class);
+    }
+
+    @Override
+    public UpdateTaskResponseBody updateTask(Long id, UpdateTaskRequestBody requestBody) {
+        Task task = taskRepository.findById(id).orElseThrow(() -> new BadRequestException("task do not exist"));
+        task.setStatus(requestBody.getStatus());
+        return modelMapper.map(task, UpdateTaskResponseBody.class);
     }
 }

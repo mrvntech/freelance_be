@@ -1,6 +1,6 @@
 package com.example.freelance_be.dto.response.task;
 
-public class UpdateTaskResponseBody {
+public class GetTaskResponseBody {
     private Long id;
     private String status;
     private Job job;
