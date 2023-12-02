@@ -24,12 +24,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping("/information/detail")
     public ResponseEntity<GetUserInformationResponseBody> getUserProfile(){
         return ResponseEntity.ok().body(userService.getUserInformation());
     }
 
-    @GetMapping("/all")
+    @GetMapping("/{id}")
+    public ResponseEntity<GetUserInformationResponseBody> getUerInformation(@PathVariable Long id){
+        return ResponseEntity.ok().body(userService.getUserInformationById(id));
+    }
+
+    @GetMapping("")
     public ResponseEntity<GetAllUserInformationResponseBody> getAllUser(){
         return ResponseEntity.ok().body(userService.getAllUser());
     }

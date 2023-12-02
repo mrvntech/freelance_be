@@ -62,6 +62,12 @@ public class UserService implements IUserService {
         return modelMapper.map(user.get(), GetUserInformationResponseBody.class);
     }
 
+    public GetUserInformationResponseBody getUserInformationById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty())throw new BadRequestException("user is not existed");
+        return modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+    }
+
     @Override
     public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody, MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         System.out.println(requestBody.getDateOfBirth());
