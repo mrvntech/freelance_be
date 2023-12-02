@@ -14,6 +14,16 @@ public class GetAllProfileResponseBody {
     }
 
     public static class Profile {
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
         private Level level;
         private Category category;
         private WorkingType workingType;
