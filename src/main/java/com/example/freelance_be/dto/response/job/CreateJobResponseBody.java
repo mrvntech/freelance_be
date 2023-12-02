@@ -10,6 +10,16 @@ public class CreateJobResponseBody {
     private String status;
     private Level level;
     private Category category;
+    private User owner;
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     private WorkingType workingType;
 
     public Level getLevel() {
@@ -134,6 +144,35 @@ public class CreateJobResponseBody {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+    public static class User {
+        private Long id;
+        private String fullName;
+        private String imageUrl;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getFullName() {
+            return fullName;
+        }
+
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
     }
 }

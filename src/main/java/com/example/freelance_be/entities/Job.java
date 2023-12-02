@@ -25,7 +25,7 @@ public class Job {
     private Category category;
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private User customer;
+    private User owner;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -99,12 +99,13 @@ public class Job {
         this.category = category;
     }
 
-    public User getCustomer() {
-        return customer;
+
+    public User getOwner() {
+        return owner;
     }
 
-    public void setCustomer(User customer) {
-        this.customer = customer;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getImageUrl() {

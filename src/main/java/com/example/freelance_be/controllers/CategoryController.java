@@ -26,13 +26,13 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.createCategory(requestBody));
     }
 
-//    @GetMapping("/all")
-//    public ResponseEntity<GetAllCategoryResponseBody> getAllCategory(@RequestParam Map<String, String> allParams){
-//        return ResponseEntity.ok().body(categoryService.getAllCategory(allParams));
-//    }
-
     @GetMapping("")
-    public ResponseEntity<GetCategoryResponseBody> getCategory(@RequestParam Map<String, String> allParams){
-        return ResponseEntity.ok().body(categoryService.getCategory(allParams));
+    public ResponseEntity<GetAllCategoryResponseBody> getAllCategory(@RequestParam Map<String, String> allParams){
+        return ResponseEntity.ok().body(categoryService.getAllCategory(allParams));
     }
+
+//    @GetMapping("")
+//    public ResponseEntity<GetCategoryResponseBody> getCategory(@RequestParam Map<String, String> allParams){
+//        return ResponseEntity.ok().body(categoryService.getCategory(allParams));
+//    }
 }

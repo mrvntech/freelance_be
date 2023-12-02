@@ -44,7 +44,7 @@ public class CreateJobService implements ICreateJobService {
         Category category = categoryRepository.findById(requestBody.getCategoryId()).orElseThrow(() -> new BadRequestException("category do not existed"));
         Level level = levelRepository.findById(requestBody.getLevelId()).orElseThrow(() -> new BadRequestException("level is not exist"));
         WorkingType workingType = workingTypeRepository.findById(requestBody.getWorkingTypeId()).orElseThrow(() -> new BadRequestException("working type is not exist"));
-        job.setCustomer(authUser);
+        job.setOwner(authUser);
         job.setCategory(category);
         job.setLevel(level);
         job.setWorkingType(workingType);

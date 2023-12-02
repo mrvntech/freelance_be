@@ -39,16 +39,16 @@ public class JobController {
     public ResponseEntity<GetAllJobResponseBody> getAllJob(@RequestParam Map<String, String> allParams){
         return ResponseEntity.ok().body(jobService.getAllJob(allParams));
     }
-
-    @GetMapping("")
-    public ResponseEntity<GetJobResponseBody> getJob(@RequestParam Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return ResponseEntity.ok().body(jobService.getJob(allParams));
-    }
-    @PostMapping("/{id}/apply")
-    public boolean applyJob(@PathVariable Long id){
-        jobService.applyJob(id);
-        return true;
-    }
+//
+//    @GetMapping("")
+//    public ResponseEntity<GetJobResponseBody> getJob(@RequestParam Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+//        return ResponseEntity.ok().body(jobService.getJob(allParams));
+//    }
+//    @PostMapping("/{id}/apply")
+//    public boolean applyJob(@PathVariable Long id){
+//        jobService.applyJob(id);
+//        return true;
+//    }
 //    @PostMapping("/{id}/hide")
 //    public boolean hideFreelancer(@PathVariable long id, @RequestBody HideFreelancerRequestBody requestBody){
 //        return jobService.hideFreelancer(id, requestBody);
