@@ -49,16 +49,16 @@ public class JobController {
         jobService.applyJob(id);
         return true;
     }
-    @PostMapping("/{id}/hide")
-    public boolean hideFreelancer(@PathVariable long id, @RequestBody HideFreelancerRequestBody requestBody){
-        return jobService.hideFreelancer(id, requestBody);
-    }
-    @PostMapping("/{id}/upload-image")
-    public boolean uploadImage(@PathVariable Long id, @RequestParam("image")MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return jobService.uploadImageUrl(id, file);
-    }
-    @GetMapping("/{id}/image-url")
-    public String getImageUrl(@PathVariable long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return jobService.getJobImageUrl(id);
-    }
+//    @PostMapping("/{id}/hide")
+//    public boolean hideFreelancer(@PathVariable long id, @RequestBody HideFreelancerRequestBody requestBody){
+//        return jobService.hideFreelancer(id, requestBody);
+//    }
+//    @PostMapping("/{id}/upload-image")
+//    public boolean uploadImage(@PathVariable Long id, @RequestParam("image")MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+//        return jobService.uploadImageUrl(id, file);
+//    }
+//    @GetMapping("/{id}/image-url")
+//    public String getImageUrl(@PathVariable long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+//        return jobService.getJobImageUrl(id);
+//    }
 }
