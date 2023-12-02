@@ -71,7 +71,12 @@ public class UserService implements IUserService {
     @Override
     public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody, MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         System.out.println(requestBody.getDateOfBirth());
-        User user = userRepository.findById(requestBody.getId()).orElseThrow(()->new BadRequestException("user do not existed"));
+        Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(principal instanceof Jwt)){
+            throw new AuthenticationException("Authentication Error");
+        }
+        String username = (String) ((Jwt) principal).getClaims().get("username");
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new BadRequestException("user do not exit"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(requestBody.getDateOfBirth() != null) user.setDateOfBirth(dateFormat.parse(requestBody.getDateOfBirth()));
         if(requestBody.getAddress() != null) user.setAddress(requestBody.getAddress());
