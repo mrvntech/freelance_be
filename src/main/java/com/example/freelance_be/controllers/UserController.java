@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("")
-    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestPart("form") UpdateUserInformationRequestBody requestBody) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestBody UpdateUserInformationRequestBody requestBody) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return ResponseEntity.ok().body(userService.updateUserInformation(requestBody));
     }
 
