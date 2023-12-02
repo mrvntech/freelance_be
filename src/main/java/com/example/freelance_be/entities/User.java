@@ -17,6 +17,7 @@ public class User {
     private Date dateOfBirth;
     private String fullName;
     private String phoneNumber;
+    @Column(length = 500)
     private String imageUrl;
     private String password;
     private boolean isActive = true;

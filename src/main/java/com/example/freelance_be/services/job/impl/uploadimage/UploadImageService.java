@@ -31,7 +31,6 @@ public class UploadImageService implements IUploadImageService {
     public boolean uploadImage(Long jobId, MultipartFile file) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         String imageUrl = jobImageUrlCreator.createImageUrl(jobId, file.getOriginalFilename());
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job do not existed"));
-//        job.setImageObject(imageUrl);
         jobRepository.save(job);
         minioClient.putObject(PutObjectArgs
                 .builder()

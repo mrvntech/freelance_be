@@ -9,13 +9,19 @@ import com.example.freelance_be.entities.User;
 import com.example.freelance_be.exception.exception.AuthenticationException;
 import com.example.freelance_be.exception.exception.BadRequestException;
 import com.example.freelance_be.repositories.UserRepository;
+import com.example.freelance_be.services.minio.iml.MinioService;
 import com.example.freelance_be.services.user.IUserService;
+import io.minio.errors.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -26,11 +32,12 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    private final MinioService minioService;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, MinioService minioService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
+        this.minioService = minioService;
     }
 
     @Override
@@ -56,7 +63,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody) throws ParseException {
+    public UpdateUserInformationResponseBody updateUserInformation(UpdateUserInformationRequestBody requestBody, MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         System.out.println(requestBody.getDateOfBirth());
         User user = userRepository.findById(requestBody.getId()).orElseThrow(()->new BadRequestException("user do not existed"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,6 +73,8 @@ public class UserService implements IUserService {
         if(requestBody.getGender() != null) user.setGender(requestBody.getGender());
         if(requestBody.getPhoneNumber() != null) user.setPhoneNumber(requestBody.getPhoneNumber());
         if(requestBody.getPassword() != null) user.setPassword(passwordEncoder.encode(requestBody.getPassword()));
+        String imageUrl = minioService.uploadImage(file);
+        user.setImageUrl(imageUrl);
         userRepository.save(user);
         return modelMapper.map(user, UpdateUserInformationResponseBody.class);
     }

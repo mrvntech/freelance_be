@@ -5,9 +5,14 @@ import com.example.freelance_be.dto.response.user.GetAllUserInformationResponseB
 import com.example.freelance_be.dto.response.user.GetUserInformationResponseBody;
 import com.example.freelance_be.dto.response.user.UpdateUserInformationResponseBody;
 import com.example.freelance_be.services.user.impl.UserService;
+import io.minio.errors.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
 @RestController
@@ -30,8 +35,8 @@ public class UserController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestPart("form") UpdateUserInformationRequestBody requestBody) throws ParseException {
-        return ResponseEntity.ok().body(userService.updateUserInformation(requestBody));
+    public ResponseEntity<UpdateUserInformationResponseBody> updateUserInformation(@RequestPart("form") UpdateUserInformationRequestBody requestBody, @RequestPart("file")MultipartFile file) throws ParseException, ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return ResponseEntity.ok().body(userService.updateUserInformation(requestBody, file));
     }
 
     @DeleteMapping("/{id}")
