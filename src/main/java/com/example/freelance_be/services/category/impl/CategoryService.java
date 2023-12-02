@@ -36,14 +36,17 @@ public class CategoryService implements ICategoryService {
         return null;
     }
     @Override
-    public GetCategoryResponseBody getCategory(Map<String, String> allParams) {
-        SearchProperties searchProperties = new SearchProperties(allParams);
-        AtomicReference<GetCategoryResponseBody> responseBody = new AtomicReference<>(new GetCategoryResponseBody());
-        Optional<Category> category = categoryRepository.findOne(searchProperties.getcategorySpecification());
-        category.ifPresent(existedCategory -> {
-            responseBody.set(modelMapper.map(existedCategory, GetCategoryResponseBody.class));
-        });
-        return responseBody.get();
+    public GetCategoryResponseBody getCategory(Long id) {
+//        SearchProperties searchProperties = new SearchProperties(allParams);
+//        AtomicReference<GetCategoryResponseBody> responseBody = new AtomicReference<>(new GetCategoryResponseBody());
+//        Optional<Category> category = categoryRepository.findOne(searchProperties.getcategorySpecification());
+//        category.ifPresent(existedCategory -> {
+//            responseBody.set(modelMapper.map(existedCategory, GetCategoryResponseBody.class));
+//        });
+        GetCategoryResponseBody responseBody = new GetCategoryResponseBody();
+        Optional<Category> category = categoryRepository.findById(id);
+        category.ifPresentOrElse((data) -> responseBody.setCategory(modelMapper.map(data, GetCategoryResponseBody.Category.class)), () -> responseBody.setCategory(null));
+        return responseBody;
     }
     @Override
     public GetAllCategoryResponseBody getAllCategory(Map<String, String> allParams) {

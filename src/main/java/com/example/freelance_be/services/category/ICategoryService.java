@@ -11,6 +11,6 @@ import java.util.Map;
 
 public interface ICategoryService {
     CreateCategoryResponseBody createCategory(CreateCategoryRequestBody requestBody);
-    GetCategoryResponseBody getCategory(Map<String, String> allParams);
+    GetCategoryResponseBody getCategory(Long id);
     GetAllCategoryResponseBody getAllCategory(Map<String, String> allParams);
 }

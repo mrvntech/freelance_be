@@ -31,6 +31,11 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getAllCategory(allParams));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<GetCategoryResponseBody> getCategory(@PathVariable Long id){
+        return ResponseEntity.ok().body(categoryService.getCategory(id));
+    }
+
 //    @GetMapping("")
 //    public ResponseEntity<GetCategoryResponseBody> getCategory(@RequestParam Map<String, String> allParams){
 //        return ResponseEntity.ok().body(categoryService.getCategory(allParams));
