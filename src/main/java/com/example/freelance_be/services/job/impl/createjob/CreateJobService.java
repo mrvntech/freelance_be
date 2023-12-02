@@ -7,10 +7,16 @@ import com.example.freelance_be.exception.exception.AuthenticationException;
 import com.example.freelance_be.exception.exception.BadRequestException;
 import com.example.freelance_be.repositories.*;
 import com.example.freelance_be.services.job.ICreateJobService;
+import com.example.freelance_be.services.minio.iml.MinioService;
+import io.minio.errors.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @Component
@@ -21,17 +27,19 @@ public class CreateJobService implements ICreateJobService {
     private final JobRepository jobRepository;
     private final LevelRepository levelRepository;
     private final WorkingTypeRepository workingTypeRepository;
+    private final MinioService minioService;
 
-    public CreateJobService(UserRepository userRepository, CategoryRepository categoryRepository, RequestBodyConverter requestBodyConverter, JobRepository jobRepository, LevelRepository levelRepository, WorkingTypeRepository workingTypeRepository) {
+    public CreateJobService(UserRepository userRepository, CategoryRepository categoryRepository, RequestBodyConverter requestBodyConverter, JobRepository jobRepository, LevelRepository levelRepository, WorkingTypeRepository workingTypeRepository, MinioService minioService) {
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.requestBodyConverter = requestBodyConverter;
         this.jobRepository = jobRepository;
         this.levelRepository = levelRepository;
         this.workingTypeRepository = workingTypeRepository;
+        this.minioService = minioService;
     }
 
-    public Job createJob(CreateJobRequestBody requestBody) {
+    public Job createJob(CreateJobRequestBody requestBody, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(!(principal instanceof Jwt)){
             throw new AuthenticationException("Authentication Error");
@@ -48,6 +56,8 @@ public class CreateJobService implements ICreateJobService {
         job.setCategory(category);
         job.setLevel(level);
         job.setWorkingType(workingType);
+        String imageUrl = minioService.uploadImage(file);
+        job.setImageUrl(imageUrl);
         jobRepository.save(job);
         return job;
     }

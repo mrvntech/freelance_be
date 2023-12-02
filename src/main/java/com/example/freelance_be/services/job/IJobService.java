@@ -16,11 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface IJobService {
-    CreateJobResponseBody createJob(CreateJobRequestBody requestBody);
-    GetJobResponseBody getJob(Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    CreateJobResponseBody createJob(CreateJobRequestBody requestBody, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    GetJobResponseBody getJob(Long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     GetAllJobResponseBody getAllJob(Map<String, String> allParams);
-    boolean uploadImageUrl(Long jobId, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
     void applyJob(Long jobId);
-    boolean hideFreelancer(Long jobId, HideFreelancerRequestBody requestBody);
-    String getJobImageUrl(Long jobId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    void updateJobStatus(Long id, String jobStatus);
 }

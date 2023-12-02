@@ -26,10 +26,7 @@ public class ListJobToGetAllJobResponseConverter extends Converter<List<Job>, Ge
     public GetAllJobResponseBody convert(List<Job> jobs) {
         GetAllJobResponseBody responseBody = new GetAllJobResponseBody();
         responseBody.setJobs(jobs.stream().map((job)-> {
-            GetAllJobResponseBody.Job responseJob = modelMapper.map(job, GetAllJobResponseBody.Job.class);
-            responseJob.setCategoryName(job.getCategory().getName());
-            responseJob.setOwner(new GetAllJobResponseBody.Owner(1L, "phucnq", ""));
-            return responseJob;
+            return modelMapper.map(job, GetAllJobResponseBody.Job.class);
         }).collect(Collectors.toList()));
         return responseBody;
     }

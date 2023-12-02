@@ -1,8 +1,8 @@
 package com.example.freelance_be.dto.request.application;
 
-public class CreateApplicationBody {
-    private Long jobId;
+public class UpdateApplicationRequestBody {
     private Long profileId;
+    private String status;
 
     public Long getProfileId() {
         return profileId;
@@ -12,11 +12,11 @@ public class CreateApplicationBody {
         this.profileId = profileId;
     }
 
-    public Long getJobId() {
-        return jobId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setJobId(Long jobId) {
-        this.jobId = jobId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -10,8 +10,10 @@ import java.util.List;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-    @Query(value = "select a from application a " +
-            "where a.user.id = :userId"
-    )
-    List<Application> findByUserId(@Param("userId") Long userId);
+//    @Query(value = "select a from application a " +
+//            "where a.user.id = :userId"
+//    )
+    List<Application> findByUserId(Long userId);
+    List<Application> findByJobId(Long jobId);
+
 }

@@ -11,6 +11,7 @@ public class Job {
     private String name;
     private Double budget;
     private String information;
+    @Column(length = 500)
     private String imageUrl;
     private String status;
     private Date createdAt;

@@ -4,17 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class CreateJobRequestBody {
-    @NotBlank(message = "name is required")
     private String name;
-    @NotNull(message = "budget is required")
     private Double budget;
-    @NotNull(message = "information is required")
     private String information;
-    @NotNull(message = "category is required")
     private Long categoryId;
-    @NotNull(message = "working type is required")
     private Long workingTypeId;
-    @NotNull(message = "job level is required")
     private Long levelId;
     private String dueDate;
 

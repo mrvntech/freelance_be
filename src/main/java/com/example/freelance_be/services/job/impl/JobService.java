@@ -6,6 +6,8 @@ import com.example.freelance_be.dto.response.job.CreateJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetAllJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetJobResponseBody;
 import com.example.freelance_be.entities.Job;
+import com.example.freelance_be.exception.exception.BadRequestException;
+import com.example.freelance_be.repositories.JobRepository;
 import com.example.freelance_be.services.job.ICreateJobService;
 import com.example.freelance_be.services.job.IGetAllJobService;
 import com.example.freelance_be.services.job.IGetJobService;
@@ -16,7 +18,6 @@ import com.example.freelance_be.services.job.impl.getImageUrl.GetImageUrlService
 import com.example.freelance_be.services.job.impl.hidefreelancer.HideFreelancerService;
 import com.example.freelance_be.services.job.impl.uploadimage.UploadImageService;
 import io.minio.errors.*;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +39,8 @@ public class JobService implements IJobService {
     private final HideFreelancerService hideFreelancerService;
     private final UploadImageService uploadImageService;
     private final GetImageUrlService getImageUrlService;
-    public JobService(CreateJobService createJobService, IGetAllJobService getAllJobService, IGetJobService getJobService, JobToCreateJobResponseConverter jobToCreateJobResponseConverter, ListJobToGetAllJobResponseConverter listJobToGetAllJobResponseConverter, JobToGetJobResponseConverter jobToGetJobResponseConverter, ApplyJobService applyJobService, HideFreelancerService hideFreelancerService, UploadImageService uploadImageService, GetImageUrlService getImageUrlService) {
+    private final JobRepository jobRepository;
+    public JobService(CreateJobService createJobService, IGetAllJobService getAllJobService, IGetJobService getJobService, JobToCreateJobResponseConverter jobToCreateJobResponseConverter, ListJobToGetAllJobResponseConverter listJobToGetAllJobResponseConverter, JobToGetJobResponseConverter jobToGetJobResponseConverter, ApplyJobService applyJobService, HideFreelancerService hideFreelancerService, UploadImageService uploadImageService, GetImageUrlService getImageUrlService, JobRepository jobRepository) {
         this.createJobService = createJobService;
         this.getAllJobService = getAllJobService;
         this.getJobService = getJobService;
@@ -49,11 +51,12 @@ public class JobService implements IJobService {
         this.hideFreelancerService = hideFreelancerService;
         this.uploadImageService = uploadImageService;
         this.getImageUrlService = getImageUrlService;
+        this.jobRepository = jobRepository;
     }
 
     @Override
-    public CreateJobResponseBody createJob(CreateJobRequestBody requestBody) {
-        Job job = createJobService.createJob(requestBody);
+    public CreateJobResponseBody createJob(CreateJobRequestBody requestBody, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        Job job = createJobService.createJob(requestBody, file);
         return jobToCreateJobResponseConverter.convert(job);
     }
     @Override
@@ -61,10 +64,10 @@ public class JobService implements IJobService {
         List<Job> jobs = getAllJobService.getAllJob(allParams);
         return listJobToGetAllJobResponseConverter.convert(jobs);
     }
-    @Override
-    public boolean uploadImageUrl(Long jobId, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return uploadImageService.uploadImage(jobId, file);
-    }
+//    @Override
+//    public boolean uploadImageUrl(Long jobId, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+//        return uploadImageService.uploadImage(jobId, file);
+//    }
 
     @Override
     public void applyJob(Long jobId) {
@@ -72,22 +75,25 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public boolean hideFreelancer(Long jobId, HideFreelancerRequestBody requestBody) {
-        return hideFreelancerService.hideFreelancer(jobId, requestBody);
+    public void updateJobStatus(Long id, String jobStatus) {
+        Job job = jobRepository.findById(id).orElseThrow(() -> new BadRequestException("job do not exit"));
+        job.setStatus(jobStatus);
+        jobRepository.save(job);
     }
 
-    @Override
-    public String getJobImageUrl(Long jobId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        return getImageUrlService.getImageUrl(jobId);
-    }
+//    @Override
+//    public boolean hideFreelancer(Long jobId, HideFreelancerRequestBody requestBody) {
+//        return hideFreelancerService.hideFreelancer(jobId, requestBody);
+//    }
+
+//    @Override
+//    public String getJobImageUrl(Long jobId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+//        return getImageUrlService.getImageUrl(jobId);
+//    }
 
     @Override
-    public GetJobResponseBody getJob(Map<String, String> allParams) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        Job job = getJobService.getJob(Long.valueOf(allParams.get("id")));
-        GetJobResponseBody responseBody = jobToGetJobResponseConverter.convert(job);
-//        if(job.getImageObject() != null){
-//            responseBody.setImageUrl(getJobImageUrl(job.getId()));
-//        }
-        return responseBody;
+    public GetJobResponseBody getJob(Long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        Job job = getJobService.getJob(id);
+        return jobToGetJobResponseConverter.convert(job);
     }
 }

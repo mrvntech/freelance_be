@@ -17,11 +17,29 @@ public class GetAllJobResponseBody {
         private String name;
         private Double budget;
         private String information;
-        private String categoryName;
-        private String typeOfEmployee;
-        private String jobLevel;
-        private String postDate;
-        private Owner owner;
+        private Category category;
+        private Level level;
+        private String createAt;
+        private User owner;
+        private WorkingType workingType;
+        private String imageUrl;
+        private String status;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
 
         public Long getId() {
             return id;
@@ -55,79 +73,134 @@ public class GetAllJobResponseBody {
             this.information = information;
         }
 
-        public String getCategoryName() {
-            return categoryName;
+        public static class Category {
+            private Long id;
+            private String name;
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        }
+        public static class WorkingType {
+            private Long id;
+            private String name;
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        }
+        public static class Level {
+            private Long id;
+            private String name;
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        }
+        public static class User {
+            private Long id;
+            private String fullName;
+            private String imageUrl;
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getFullName() {
+                return fullName;
+            }
+
+            public void setFullName(String fullName) {
+                this.fullName = fullName;
+            }
+
+            public String getImageUrl() {
+                return imageUrl;
+            }
+
+            public void setImageUrl(String imageUrl) {
+                this.imageUrl = imageUrl;
+            }
         }
 
-        public void setCategoryName(String categoryName) {
-            this.categoryName = categoryName;
+        public Category getCategory() {
+            return category;
         }
 
-        public String getTypeOfEmployee() {
-            return typeOfEmployee;
+        public void setCategory(Category category) {
+            this.category = category;
         }
 
-        public void setTypeOfEmployee(String typeOfEmployee) {
-            this.typeOfEmployee = typeOfEmployee;
+        public Level getLevel() {
+            return level;
         }
 
-        public String getJobLevel() {
-            return jobLevel;
+        public void setLevel(Level level) {
+            this.level = level;
         }
 
-        public void setJobLevel(String jobLevel) {
-            this.jobLevel = jobLevel;
+        public String getCreateAt() {
+            return createAt;
         }
 
-        public String getPostDate() {
-            return postDate;
+        public void setCreateAt(String createAt) {
+            this.createAt = createAt;
         }
 
-        public void setPostDate(String postDate) {
-            this.postDate = postDate;
-        }
-
-        public Owner getOwner() {
+        public User getOwner() {
             return owner;
         }
 
-        public void setOwner(Owner owner) {
+        public void setOwner(User owner) {
             this.owner = owner;
         }
-    }
-    public static class Owner {
-        private Long id;
-        private String ownerName;
-        private String avatar;
 
-        public Owner(Long id, String ownerName, String avatar) {
-            this.id = id;
-            this.ownerName = ownerName;
-            this.avatar = avatar;
+        public WorkingType getWorkingType() {
+            return workingType;
         }
 
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public String getOwnerName() {
-            return ownerName;
-        }
-
-        public void setOwnerName(String ownerName) {
-            this.ownerName = ownerName;
-        }
-
-        public String getAvatar() {
-            return avatar;
-        }
-
-        public void setAvatar(String avatar) {
-            this.avatar = avatar;
+        public void setWorkingType(WorkingType workingType) {
+            this.workingType = workingType;
         }
     }
 }

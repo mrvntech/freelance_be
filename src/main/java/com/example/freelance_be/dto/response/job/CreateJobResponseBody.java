@@ -1,6 +1,5 @@
 package com.example.freelance_be.dto.response.job;
 
-import java.util.Date;
 
 public class CreateJobResponseBody {
     private Long id;
@@ -11,6 +10,15 @@ public class CreateJobResponseBody {
     private Level level;
     private Category category;
     private User owner;
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public User getOwner() {
         return owner;

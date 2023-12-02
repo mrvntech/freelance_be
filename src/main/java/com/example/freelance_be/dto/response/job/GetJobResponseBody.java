@@ -8,28 +8,41 @@ public class GetJobResponseBody {
     private Double budget;
     private String information;
     private Category category;
-    private User customer;
-    private User freelancer;
-    private String typeOfEmployee;
+    private User owner;
+    private WorkingType workingType;
     private String imageUrl;
-    private String jobLevel;
-    private List<User> appliers;
+    private Level level;
+    private String createAt;
+    private String status;
 
-    public User getFreelancer() {
-        return freelancer;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    public void setFreelancer(User freelancer) {
-        this.freelancer = freelancer;
-    }
 
     public Category getCategory() {
         return category;
@@ -52,46 +65,38 @@ public class GetJobResponseBody {
     public Double getBudget() {
         return budget;
     }
-    public void setBudget(Double budget) {
-        this.budget = budget;
-    }
-    public String getInformation() {
-        return information;
-    }
-    public void setInformation(String information) {
-        this.information = information;
+
+
+    public User getOwner() {
+        return owner;
     }
 
-    public User getCustomer() {
-        return customer;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    public void setCustomer(User customer) {
-        this.customer = customer;
+    public WorkingType getWorkingType() {
+        return workingType;
     }
 
-    public String getTypeOfEmployee() {
-        return typeOfEmployee;
+    public void setWorkingType(WorkingType workingType) {
+        this.workingType = workingType;
     }
 
-    public void setTypeOfEmployee(String typeOfEmployee) {
-        this.typeOfEmployee = typeOfEmployee;
+    public Level getLevel() {
+        return level;
     }
 
-    public String getJobLevel() {
-        return jobLevel;
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
-    public void setJobLevel(String jobLevel) {
-        this.jobLevel = jobLevel;
+    public String getCreateAt() {
+        return createAt;
     }
 
-    public List<User> getAppliers() {
-        return appliers;
-    }
-
-    public void setAppliers(List<User> appliers) {
-        this.appliers = appliers;
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
     }
 
     public static class Category {
@@ -114,83 +119,6 @@ public class GetJobResponseBody {
             this.name = name;
         }
     }
-    public static class Job {
-        private Long id;
-        private String name;
-        private Double budget;
-        private String information;
-        private Category category;
-        private User customer;
-        private User freelancer;
-
-        public User getFreelancer() {
-            return freelancer;
-        }
-
-        public void setFreelancer(User freelancer) {
-            this.freelancer = freelancer;
-        }
-
-        public Category getCategory() {
-            return category;
-        }
-        public void setCategory(Category category) {
-            this.category = category;
-        }
-        public Long getId() {
-            return id;
-        }
-        public void setId(Long id) {
-            this.id = id;
-        }
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public Double getBudget() {
-            return budget;
-        }
-        public void setBudget(Double budget) {
-            this.budget = budget;
-        }
-        public String getInformation() {
-            return information;
-        }
-        public void setInformation(String information) {
-            this.information = information;
-        }
-
-        public User getCustomer() {
-            return customer;
-        }
-
-        public void setCustomer(User customer) {
-            this.customer = customer;
-        }
-
-        public static class Category {
-            private Long id;
-            private String name;
-
-            public Long getId() {
-                return id;
-            }
-
-            public void setId(Long id) {
-                this.id = id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-        }
-    }
     public static class User {
         private String username;
         private Long id;
@@ -209,6 +137,46 @@ public class GetJobResponseBody {
 
         public void setUsername(String username) {
             this.username = username;
+        }
+    }
+    public static class WorkingType {
+        private Long id;
+        private String name;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+    public static class Level {
+        private Long id;
+        private String name;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

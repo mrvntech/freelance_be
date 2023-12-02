@@ -30,14 +30,23 @@ public class JobController {
         this.jobService = jobService;
     }
     @PostMapping("")
-    public ResponseEntity<CreateJobResponseBody> createJob(@Valid @RequestBody CreateJobRequestBody requestBody){
+    public ResponseEntity<CreateJobResponseBody> createJob(@RequestPart("form") CreateJobRequestBody requestBody, @RequestPart("file") MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
-        return ResponseEntity.ok().body(jobService.createJob(requestBody));
+        return ResponseEntity.ok().body(jobService.createJob(requestBody, file));
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<GetAllJobResponseBody> getAllJob(@RequestParam Map<String, String> allParams){
         return ResponseEntity.ok().body(jobService.getAllJob(allParams));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GetJobResponseBody> getJob(@PathVariable Long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return ResponseEntity.ok().body(jobService.getJob(id));
+    }
+    @PutMapping("/{id}")
+    public boolean updateJobStatus(@PathVariable Long id, @RequestPart("status") String status){
+        jobService.updateJobStatus(id, status);
+        return true;
     }
 //
 //    @GetMapping("")

@@ -40,6 +40,11 @@ public class GetAllJobService implements IGetAllJobService {
 //            return jobRepository.findAll(searchProperties.getCategoryId(), user.getId(), null, null);
 //        }
 //        return jobRepository.findAll(searchProperties.getCategoryId(), null, user.getId(), null);
-        return null;
+//        return null;
+        if(allParams.get("userId") != null){
+            Long userId = Long.valueOf(allParams.get("userId"));
+            return jobRepository.findJobByOwnerId(userId);
+        }
+        return jobRepository.findAll();
     }
 }

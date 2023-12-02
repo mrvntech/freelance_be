@@ -28,4 +28,5 @@ public interface JobRepository extends JpaRepository<Job, Long>, JpaSpecificatio
 //            "inner join j.category c " +
 //            "where j.id = :id and c.name = :category_name")
 //    Optional<Job> findJob(@Param("id") Long id, @Param("category_name") String categoryName );
+    List<Job> findJobByOwnerId(Long id);
 }
