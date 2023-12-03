@@ -8,6 +8,8 @@ import com.example.freelance_be.services.profile.impl.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequestMapping("/profile")
 @RestController
 public class ProfileController {
@@ -23,8 +25,8 @@ public class ProfileController {
     }
 
     @GetMapping("")
-    public ResponseEntity<GetAllProfileResponseBody> getProfile(){
-        return ResponseEntity.ok().body(profileService.getAllProfile());
+    public ResponseEntity<GetAllProfileResponseBody> getProfile(@RequestParam Map<String, String> query){
+        return ResponseEntity.ok().body(profileService.getAllProfile(query));
     }
 
     @PutMapping("")

@@ -15,6 +15,15 @@ public class GetAllProfileResponseBody {
 
     public static class Profile {
         private Long id;
+        private User user;
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
 
         public Long getId() {
             return id;
@@ -140,6 +149,17 @@ public class GetAllProfileResponseBody {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+    public static class User {
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
         }
     }
 }

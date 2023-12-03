@@ -17,6 +17,16 @@ public class Profile {
     private Category category;
     @ManyToOne
     private WorkingType workingType;
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;

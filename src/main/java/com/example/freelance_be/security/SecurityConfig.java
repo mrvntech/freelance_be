@@ -49,6 +49,8 @@ public class SecurityConfig {
 //                    .authenticated()
                     .requestMatchers("/applications")
                     .authenticated()
+                    .requestMatchers(HttpMethod.POST, "/profile")
+                    .authenticated()
                     .anyRequest()
                     .permitAll();
         });
