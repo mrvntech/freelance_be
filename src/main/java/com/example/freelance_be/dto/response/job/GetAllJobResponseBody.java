@@ -19,7 +19,17 @@ public class GetAllJobResponseBody {
         private String information;
         private Category category;
         private Level level;
-        private String createAt;
+        private String createdAt;
+        private String dueDate;
+
+        public String getDueDate() {
+            return dueDate;
+        }
+
+        public void setDueDate(String dueDate) {
+            this.dueDate = dueDate;
+        }
+
         private User owner;
         private WorkingType workingType;
         private String imageUrl;
@@ -188,12 +198,12 @@ public class GetAllJobResponseBody {
             this.level = level;
         }
 
-        public String getCreateAt() {
-            return createAt;
+        public String getCreatedAt() {
+            return createdAt;
         }
 
-        public void setCreateAt(String createAt) {
-            this.createAt = createAt;
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
         }
 
         public User getOwner() {

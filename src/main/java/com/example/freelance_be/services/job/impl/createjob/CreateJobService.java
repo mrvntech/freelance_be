@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -39,7 +41,7 @@ public class CreateJobService implements ICreateJobService {
         this.minioService = minioService;
     }
 
-    public Job createJob(CreateJobRequestBody requestBody) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public Job createJob(CreateJobRequestBody requestBody) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException, ParseException {
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(!(principal instanceof Jwt)){
             throw new AuthenticationException("Authentication Error");
@@ -55,6 +57,7 @@ public class CreateJobService implements ICreateJobService {
         job.setOwner(authUser);
         job.setCategory(category);
         job.setLevel(level);
+        job.setDueDate(new SimpleDateFormat("yyyy-MM-dd").parse(requestBody.getDueDate()));
         job.setWorkingType(workingType);
 //        String imageUrl = minioService.uploadImage(file);
 //        job.setImageUrl(imageUrl);

@@ -1,7 +1,5 @@
 package com.example.freelance_be.dto.response.job;
 
-import java.util.List;
-
 public class GetJobResponseBody {
     private Long id;
     private String name;
@@ -12,7 +10,17 @@ public class GetJobResponseBody {
     private WorkingType workingType;
     private String imageUrl;
     private Level level;
-    private String createAt;
+    private String createdAt;
+    private String dueDate;
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
     private String status;
 
     public String getStatus() {
@@ -91,12 +99,12 @@ public class GetJobResponseBody {
         this.level = level;
     }
 
-    public String getCreateAt() {
-        return createAt;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public static class Category {

@@ -46,7 +46,7 @@ public class OauthService implements IOauthService {
         Jwt jwt = jwtEncoder.encode(jwtEncoderParameters);
         AuthenticationResponseBody responseBody = new AuthenticationResponseBody();
         responseBody.setAccessToken(jwt.getTokenValue());
-        if(body.getUsername().equals("mictosieunhan@gmail.com")){
+        if(body.getUsername().equals("quangphuctqvp@gmail.com")){
             responseBody.setRole("ADMIN");
         }else {
             responseBody.setRole("USER");
