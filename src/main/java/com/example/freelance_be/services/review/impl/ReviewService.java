@@ -41,8 +41,8 @@ public class ReviewService implements IReviewService {
         review.setWriter(authUser);
         User user = userRepository.findById(requestBody.getUserId()).orElseThrow(() -> new BadRequestException("user do not exist"));
         review.setUser(user);
-        review.setContent(review.getContent());
-        review.setRate(review.getRate());
+        review.setContent(requestBody.getContent());
+        review.setRate(requestBody.getRate());
         review.setCreateAt(new Date());
         reviewRepository.save(review);
         return true;
