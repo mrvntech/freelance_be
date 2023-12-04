@@ -13,14 +13,14 @@ public class GetUserInformationResponseBody {
     private String phoneNumber;
     private String imageUrl;
     private boolean active;
-    private List<Review> reviews;
+    private List<Review> listReview;
 
-    public List<Review> getReviews() {
-        return reviews;
+    public List<Review> getListReview() {
+        return listReview;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setListReview(List<Review> listReview) {
+        this.listReview = listReview;
     }
 
     public boolean isActive() {

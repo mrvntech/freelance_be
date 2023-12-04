@@ -59,13 +59,18 @@ public class UserService implements IUserService {
         String username = (String) ((Jwt) principal).getClaims().get("username");
         Optional<User> user = userRepository.findByEmail(username);
         if(user.isEmpty())throw new BadRequestException("user is not existed");
-        return modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+        GetUserInformationResponseBody getUserInformationResponseBody = modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+        getUserInformationResponseBody.setListReview(user.get().getReviews().stream().map((review -> modelMapper.map(review, GetUserInformationResponseBody.Review.class))).toList());
+        return getUserInformationResponseBody;
     }
 
     public GetUserInformationResponseBody getUserInformationById(Long id) {
         Optional<User> user = userRepository.findById(id);
         if(user.isEmpty())throw new BadRequestException("user is not existed");
-        return modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+//        return modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+        GetUserInformationResponseBody getUserInformationResponseBody = modelMapper.map(user.get(), GetUserInformationResponseBody.class);
+        getUserInformationResponseBody.setListReview(user.get().getReviews().stream().map((review -> modelMapper.map(review, GetUserInformationResponseBody.Review.class))).toList());
+        return getUserInformationResponseBody;
     }
 
     @Override
