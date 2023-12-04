@@ -39,7 +39,7 @@ public class CreateJobService implements ICreateJobService {
         this.minioService = minioService;
     }
 
-    public Job createJob(CreateJobRequestBody requestBody, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public Job createJob(CreateJobRequestBody requestBody) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         Object principal =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(!(principal instanceof Jwt)){
             throw new AuthenticationException("Authentication Error");
@@ -56,8 +56,8 @@ public class CreateJobService implements ICreateJobService {
         job.setCategory(category);
         job.setLevel(level);
         job.setWorkingType(workingType);
-        String imageUrl = minioService.uploadImage(file);
-        job.setImageUrl(imageUrl);
+//        String imageUrl = minioService.uploadImage(file);
+//        job.setImageUrl(imageUrl);
         jobRepository.save(job);
         return job;
     }

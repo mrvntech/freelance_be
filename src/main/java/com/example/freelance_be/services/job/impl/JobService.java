@@ -1,7 +1,6 @@
 package com.example.freelance_be.services.job.impl;
 
 import com.example.freelance_be.dto.request.job.CreateJobRequestBody;
-import com.example.freelance_be.dto.request.job.HideFreelancerRequestBody;
 import com.example.freelance_be.dto.response.job.CreateJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetAllJobResponseBody;
 import com.example.freelance_be.dto.response.job.GetJobResponseBody;
@@ -17,6 +16,7 @@ import com.example.freelance_be.services.job.impl.createjob.CreateJobService;
 import com.example.freelance_be.services.job.impl.getImageUrl.GetImageUrlService;
 import com.example.freelance_be.services.job.impl.hidefreelancer.HideFreelancerService;
 import com.example.freelance_be.services.job.impl.uploadimage.UploadImageService;
+import com.example.freelance_be.services.minio.iml.MinioService;
 import io.minio.errors.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,8 +39,9 @@ public class JobService implements IJobService {
     private final HideFreelancerService hideFreelancerService;
     private final UploadImageService uploadImageService;
     private final GetImageUrlService getImageUrlService;
+    private final MinioService minioService;
     private final JobRepository jobRepository;
-    public JobService(CreateJobService createJobService, IGetAllJobService getAllJobService, IGetJobService getJobService, JobToCreateJobResponseConverter jobToCreateJobResponseConverter, ListJobToGetAllJobResponseConverter listJobToGetAllJobResponseConverter, JobToGetJobResponseConverter jobToGetJobResponseConverter, ApplyJobService applyJobService, HideFreelancerService hideFreelancerService, UploadImageService uploadImageService, GetImageUrlService getImageUrlService, JobRepository jobRepository) {
+    public JobService(CreateJobService createJobService, IGetAllJobService getAllJobService, IGetJobService getJobService, JobToCreateJobResponseConverter jobToCreateJobResponseConverter, ListJobToGetAllJobResponseConverter listJobToGetAllJobResponseConverter, JobToGetJobResponseConverter jobToGetJobResponseConverter, ApplyJobService applyJobService, HideFreelancerService hideFreelancerService, UploadImageService uploadImageService, GetImageUrlService getImageUrlService, MinioService minioService, JobRepository jobRepository) {
         this.createJobService = createJobService;
         this.getAllJobService = getAllJobService;
         this.getJobService = getJobService;
@@ -51,12 +52,13 @@ public class JobService implements IJobService {
         this.hideFreelancerService = hideFreelancerService;
         this.uploadImageService = uploadImageService;
         this.getImageUrlService = getImageUrlService;
+        this.minioService = minioService;
         this.jobRepository = jobRepository;
     }
 
     @Override
-    public CreateJobResponseBody createJob(CreateJobRequestBody requestBody, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        Job job = createJobService.createJob(requestBody, file);
+    public CreateJobResponseBody createJob(CreateJobRequestBody requestBody) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        Job job = createJobService.createJob(requestBody);
         return jobToCreateJobResponseConverter.convert(job);
     }
     @Override
@@ -79,6 +81,15 @@ public class JobService implements IJobService {
         Job job = jobRepository.findById(id).orElseThrow(() -> new BadRequestException("job do not exit"));
         job.setStatus(jobStatus);
         jobRepository.save(job);
+    }
+
+    @Override
+    public boolean uploadImage(Long jobId, MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new BadRequestException("job do not exist"));
+        String imageUrl = minioService.uploadImage(file);
+        job.setImageUrl(imageUrl);
+        jobRepository.save(job);
+        return true;gi
     }
 
 //    @Override

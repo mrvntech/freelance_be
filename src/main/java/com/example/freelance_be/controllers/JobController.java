@@ -30,9 +30,9 @@ public class JobController {
         this.jobService = jobService;
     }
     @PostMapping("")
-    public ResponseEntity<CreateJobResponseBody> createJob(@RequestPart("form") CreateJobRequestBody requestBody, @RequestPart("file") MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public ResponseEntity<CreateJobResponseBody> createJob(@RequestBody CreateJobRequestBody requestBody) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
-        return ResponseEntity.ok().body(jobService.createJob(requestBody, file));
+        return ResponseEntity.ok().body(jobService.createJob(requestBody));
     }
 
     @GetMapping("")
@@ -62,10 +62,10 @@ public class JobController {
 //    public boolean hideFreelancer(@PathVariable long id, @RequestBody HideFreelancerRequestBody requestBody){
 //        return jobService.hideFreelancer(id, requestBody);
 //    }
-//    @PostMapping("/{id}/upload-image")
-//    public boolean uploadImage(@PathVariable Long id, @RequestParam("image")MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-//        return jobService.uploadImageUrl(id, file);
-//    }
+    @PostMapping("/{id}/upload-image")
+    public boolean uploadImage(@PathVariable Long id, @RequestParam("image")MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return jobService.uploadImage(id, file);
+    }
 //    @GetMapping("/{id}/image-url")
 //    public String getImageUrl(@PathVariable long id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
 //        return jobService.getJobImageUrl(id);
