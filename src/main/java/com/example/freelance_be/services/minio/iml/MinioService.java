@@ -35,6 +35,6 @@ public class MinioService implements IMinioService {
                 .stream(file.getInputStream(), file.getInputStream().available(), -1)
                 .build()
         );
-        return "localhost:9080/vlancer/" + url;
+        return "http://localhost:9080/vlancer/" + url;
     }
 }
