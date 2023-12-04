@@ -8,11 +8,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String status;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     private Job job;
     @ManyToOne
-    @JoinColumn(name = "'user_id'", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Long getId() {

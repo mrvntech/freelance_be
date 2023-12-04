@@ -24,6 +24,15 @@ public class GetAllJobResponseBody {
         private WorkingType workingType;
         private String imageUrl;
         private String status;
+        private Task task;
+
+        public Task getTask() {
+            return task;
+        }
+
+        public void setTask(Task task) {
+            this.task = task;
+        }
 
         public String getStatus() {
             return status;
@@ -201,6 +210,26 @@ public class GetAllJobResponseBody {
 
         public void setWorkingType(WorkingType workingType) {
             this.workingType = workingType;
+        }
+    }
+    public static class Task {
+        private Long id;
+        private String status;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }
