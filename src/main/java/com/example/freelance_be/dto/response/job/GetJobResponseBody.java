@@ -148,6 +148,15 @@ public class GetJobResponseBody {
         }
 
         private Long id;
+        private String imageUrl;
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
 
         public Long getId() {
             return id;
