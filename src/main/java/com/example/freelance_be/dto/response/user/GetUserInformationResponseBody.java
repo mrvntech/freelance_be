@@ -84,4 +84,14 @@ public class GetUserInformationResponseBody {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+    public static class Review {
+        private Long id;
+//        private
+    }
+
+    public static class User {
+        private Long id;
+        private String fullName;
+        private String imageUrl;
+    }
 }

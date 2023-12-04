@@ -37,6 +37,7 @@ public class OauthService implements IOauthService {
         if(existedUser.isEmpty()){
             User newUser = new User();
             newUser.setEmail(body.getUsername());
+            newUser.setImageUrl(body.getImageUrl());
             userRepository.save(newUser);
         }
         JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256).build();

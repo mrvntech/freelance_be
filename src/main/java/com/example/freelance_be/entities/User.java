@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -100,9 +101,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+    @OneToMany(targetEntity = Review.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    List<Review> reviews;
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
 
-    @ManyToOne
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public Long getId() {
         return id;
     }
@@ -110,8 +120,6 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
 
     public Set<Role> getRoles() {

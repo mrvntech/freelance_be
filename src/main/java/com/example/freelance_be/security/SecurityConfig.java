@@ -51,6 +51,8 @@ public class SecurityConfig {
                     .authenticated()
                     .requestMatchers(HttpMethod.POST, "/profile")
                     .authenticated()
+                    .requestMatchers("/reviews")
+                    .authenticated()
                     .anyRequest()
                     .permitAll();
         });

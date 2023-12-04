@@ -110,6 +110,78 @@ public class GetAllApplication {
     public static class Job {
         private Long id;
         private String name;
+        private Category category;
+        private WorkingType workingType;
+        private Level level;
+        private Double budget;
+        private String information;
+        private String imageUrl;
+        private String status;
+        private String createAt;
+
+        public Category getCategory() {
+            return category;
+        }
+
+        public void setCategory(Category category) {
+            this.category = category;
+        }
+
+        public WorkingType getWorkingType() {
+            return workingType;
+        }
+
+        public void setWorkingType(WorkingType workingType) {
+            this.workingType = workingType;
+        }
+
+        public Level getLevel() {
+            return level;
+        }
+
+        public void setLevel(Level level) {
+            this.level = level;
+        }
+
+        public Double getBudget() {
+            return budget;
+        }
+
+        public void setBudget(Double budget) {
+            this.budget = budget;
+        }
+
+        public String getInformation() {
+            return information;
+        }
+
+        public void setInformation(String information) {
+            this.information = information;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getCreateAt() {
+            return createAt;
+        }
+
+        public void setCreateAt(String createAt) {
+            this.createAt = createAt;
+        }
 
         public String getName() {
             return name;
