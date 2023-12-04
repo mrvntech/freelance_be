@@ -89,7 +89,7 @@ public class JobService implements IJobService {
         String imageUrl = minioService.uploadImage(file);
         job.setImageUrl(imageUrl);
         jobRepository.save(job);
-        return true;gi
+        return true;
     }
 
 //    @Override
