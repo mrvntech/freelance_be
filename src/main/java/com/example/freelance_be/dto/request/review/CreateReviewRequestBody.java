@@ -3,6 +3,15 @@ package com.example.freelance_be.dto.request.review;
 public class CreateReviewRequestBody {
     private Long userId;
     private String content;
+    private Double rate;
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
 
     public Long getUserId() {
         return userId;

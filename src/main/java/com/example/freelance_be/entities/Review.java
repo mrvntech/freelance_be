@@ -2,12 +2,24 @@ package com.example.freelance_be.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Review {
     @Id
     private Long id;
     private String content;
     private Double rate;
+    private Date createAt;
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
     @ManyToOne
     @JoinColumn(name = "writer_id", referencedColumnName = "id")
     private User writer;
