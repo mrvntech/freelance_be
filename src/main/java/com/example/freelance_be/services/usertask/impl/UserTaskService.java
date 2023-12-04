@@ -53,6 +53,7 @@ public class UserTaskService implements IUserTaskService {
     public UpdateTaskResponseBody updateTask(Long id, UpdateTaskRequestBody requestBody) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new BadRequestException("task do not exist"));
         task.setStatus(requestBody.getStatus());
+        taskRepository.save(task);
         return modelMapper.map(task, UpdateTaskResponseBody.class);
     }
 }
