@@ -33,8 +33,8 @@ services:
     image: minio/minio
     command: server /data --console-address ":9001"
     ports:
-      - 127.0.0.1:9080:9001
-      - 127.0.0.1:9081:9000
+      - 127.0.0.1:9081:9001
+      - 127.0.0.1:9080:9000
     environment:
       - console-address=:9001
     # volumes:

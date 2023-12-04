@@ -35,11 +35,6 @@ public class MinioService implements IMinioService {
                 .stream(file.getInputStream(), file.getInputStream().available(), -1)
                 .build()
         );
-        return minioClient.getPresignedObjectUrl(
-                GetPresignedObjectUrlArgs.builder()
-                        .method(Method.GET)
-                        .bucket(MinioConfig.bucket)
-                        .object(url).build()
-        );
+        return "localhost:9080/vlancer/" + url;
     }
 }
